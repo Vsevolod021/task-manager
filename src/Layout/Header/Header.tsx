@@ -6,7 +6,6 @@ import logo from '../../assets/logo.svg';
 import avatar from '../../assets/avatar.png';
 import closeIcon from '../../assets/close.svg';
 
-
 type HeaderProps = {
     className?: string;
 };
