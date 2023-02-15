@@ -12,7 +12,7 @@ export interface IDeskInfoContext {
     setColor?: (newColor: string) => void;
 };
 
-export const DeskInfoContext = createContext<IDeskInfoContext>({ deskName: 'desk name', access: 'public', color: 'default' });
+export const DeskInfoContext = createContext<IDeskInfoContext>({ deskName: '', access: 'private', color: 'default' });
 
 export const DeskInfoContextProvider = ({ deskName, access, color, children }: IDeskInfoContext & { children: ReactNode }): JSX.Element => {
     const [deskNameState, setDeskNameState] = useState<string>(deskName);

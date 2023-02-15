@@ -19,12 +19,15 @@ export const Header: FC<HeaderProps> = ({ className }) => {
                 <img src={logo} alt="logo" />
                 <MenuButton />
                 <Append onClick={() => setIsCreationOpened(true)} />
-                <div className={styles.avatar}>
+                <div className={styles.avatar}>``
                     <img src={avatar} alt="user" />
                 </div>
                 <Arrow className={styles.arrow} />
                 {isCreationOpened && <Modal>
-                    <DeskCreation className={styles.deskCreation} />
+                    <DeskCreation
+                        className={styles.deskCreation}
+                        setIsCreationOpened={setIsCreationOpened}
+                    />
                     <img
                         src={closeIcon}
                         alt="close"
