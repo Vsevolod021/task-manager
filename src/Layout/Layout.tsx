@@ -6,7 +6,7 @@ import { DeskInfoContextProvider } from '../contexts/deskInfo.context';
 
 export const Layout = () => {
     return (
-        <DeskInfoContextProvider deskName='desk name' access='public' color='default'>
+        <DeskInfoContextProvider deskName='' access='' color='default' isCreated={false}>
             <div className={styles.layout}>
                 <Header />
                 <Desk />

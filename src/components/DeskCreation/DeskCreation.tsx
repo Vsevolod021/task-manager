@@ -11,52 +11,62 @@ type DeskCreationProps = {
 export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOpened }) => {
     const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple'];
 
-    const { setDeskName, setAccess, setColor } = useContext(DeskInfoContext);
+    const { setDeskName, setAccess, setColor, setIsCreated } = useContext(DeskInfoContext);
 
     const [deskColor, setDeskColor] = useState<string>('default');
-    const [isError, setIsError] = useState<boolean>(false);
+    const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
+    const [isAccessTypeError, setIsAccessTypeError] = useState<boolean>(false);
 
     const accessTypeRef = useRef<HTMLSelectElement>(null);
     const deskNameRef = useRef<HTMLInputElement>(null);
 
     const setDeskParams = () => {
         if (deskNameRef.current?.value && accessTypeRef.current?.value) {
-            if (setDeskName) {
-                setDeskName(deskNameRef.current?.value)
-            }
-            if (setAccess) {
+            if (setDeskName && setAccess && setColor && setIsCreated) {
+                setDeskName(deskNameRef.current?.value);
                 setAccess(accessTypeRef.current?.value);
-            }
-            if (setColor) {
                 setColor(deskColor);
+                setIsCreated(true);
+                setIsCreationOpened(false);
             }
-
-            setIsCreationOpened(false);
+        } else {
+            if (!deskNameRef.current?.value) {
+                setIsDeskNameError(true);
+            } else {
+                setIsDeskNameError(false);
+            }
+            if (!accessTypeRef.current?.value) {
+                setIsAccessTypeError(true);
+            } else {
+                setIsAccessTypeError(false);
+            }
         }
     };
 
     return (
         <div className={cn(styles.wrapper, className)}>
             <div className={cn(styles.deskInfo, styles[deskColor])}>
-                <input
-                    ref={deskNameRef}
-                    type="text"
-                    placeholder="Desk name"
-                />
-                {isError && <span></span>}
-                <select
-                    ref={accessTypeRef}
-                    name="access-type"
-                    id="access-type"
-                >
-                    <option value=''>---
-                    </option>
-                    <option value='public'>public
-                    </option>
-                    <option value='private'>private
-                    </option>
-                </select>
-                {isError && <span></span>}
+                <div className={styles.inputContainer}>
+                    <input
+                        ref={deskNameRef}
+                        type="text"
+                        placeholder="Desk name"
+                    />
+                    {isDeskNameError && <span className={styles.error}>Please, type desk name</span>}
+                </div>
+                <div className={styles.selectContainer}>
+                    <select
+                        ref={accessTypeRef}
+                        name="access-type"
+                        id="access-type"
+                    >
+                        <option value=''>---</option>
+                        <option value='public'>public</option>
+                        <option value='private'>private</option>
+                    </select>
+                    {isAccessTypeError && <span className={styles.error}>Please, point type of access</span>}
+                </div>
+
             </div>
             <div className={styles.color}>
                 {colorsStyles.map((c) => (

@@ -1,0 +1,64 @@
+.deskContainer {
+    padding: 40px;
+}
+
+.deskName {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 74px;
+    color: var(--black);
+    margin: 0;
+}
+
+.access {
+    margin-top: 5px;
+    color: var(--gray);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+}
+
+.deskFrame {
+    min-height: 600px;
+    width: calc(100vw - 100px);
+    border: 1px solid var(--black);
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.tasksFrame {
+    display: flex;
+    gap: 50px;
+    padding: 20px;
+}
+
+.taskCondition {
+    min-width: 500px;
+    height: 500px;
+}
+
+.default {
+    border: 2px solid var(--black);
+}
+
+.red {
+    border: 2px solid rgb(246, 98, 98);
+}
+
+.yellow {
+    border: 2px solid rgb(255, 190, 69);
+}
+
+.blue {
+    border: 2px solid rgb(82, 82, 255);
+}
+
+.pink {
+    border: 2px solid rgb(253, 170, 184);
+}
+
+.purple {
+    border: 2px solid rgb(255, 117, 255);
+}
