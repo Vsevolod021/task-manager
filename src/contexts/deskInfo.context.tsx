@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
+import { useSaveState } from '../hooks/useSaveState';
 
 export interface IDeskInfoContext {
     deskName: string;
@@ -45,44 +46,10 @@ export const DeskInfoContextProvider = ({
         setIsCreatedState(isCreated);
     };
 
-    useEffect(() => {
-        const deskNameStateData =
-            window.localStorage.getItem('desk_name') || '';
-        setDeskNameState(JSON.parse(deskNameStateData));
-    }, []);
-
-    useEffect(() => {
-        const accessStateData =
-            window.localStorage.getItem('access_type') || '';
-        setAccessState(JSON.parse(accessStateData));
-    }, []);
-
-    useEffect(() => {
-        const colorStateData = window.localStorage.getItem('color') || '';
-        setColorState(JSON.parse(colorStateData));
-    }, []);
-
-    useEffect(() => {
-        const isCreatedStateData =
-            window.localStorage.getItem('is_created') || '';
-        setIsCreatedState(JSON.parse(isCreatedStateData));
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('desk_name', JSON.stringify(deskNameState));
-    }, [deskNameState]);
-
-    useEffect(() => {
-        localStorage.setItem('access_type', JSON.stringify(accessState));
-    }, [accessState]);
-
-    useEffect(() => {
-        localStorage.setItem('color', JSON.stringify(colorState));
-    }, [colorState]);
-
-    useEffect(() => {
-        localStorage.setItem('is_created', JSON.stringify(isCreatedState));
-    }, [isCreatedState]);
+    useSaveState('desk_name', deskNameState, setDeskNameState);
+    useSaveState('access_type', accessState, setAccessState);
+    useSaveState('color', colorState, setColorState);
+    useSaveState('is_created', isCreatedState, setIsCreatedState);
 
     return (
         <DeskInfoContext.Provider

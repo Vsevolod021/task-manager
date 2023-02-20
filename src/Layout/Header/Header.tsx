@@ -11,6 +11,7 @@ import {
 import logo from '../../assets/logo.svg';
 import avatar from '../../assets/avatar.png';
 import closeIcon from '../../assets/close.svg';
+import { useSaveState } from '../../hooks/useSaveState';
 
 type HeaderProps = {
     className?: string;
@@ -19,18 +20,7 @@ type HeaderProps = {
 export const Header: FC<HeaderProps> = ({ className }) => {
     const [isCreationOpened, setIsCreationOpened] = useState<boolean>(false);
 
-    useEffect(() => {
-        const isCreatinoOpenedData =
-            window.localStorage.getItem('is_creation_opened') || '';
-        setIsCreationOpened(JSON.parse(isCreatinoOpenedData));
-    }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem(
-            'is_creation_opened',
-            JSON.stringify(isCreationOpened),
-        );
-    }, [isCreationOpened]);
+    useSaveState('is_creation_opened', isCreationOpened, setIsCreationOpened);
 
     return (
         <header className={cn(styles.header, className)}>
