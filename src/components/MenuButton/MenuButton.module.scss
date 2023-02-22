@@ -1,4 +1,6 @@
 .buttonWrapper {
+    display: block;
+    position: relative;
     width: 180px;
     height: 50px;
     border: none;
@@ -35,4 +37,10 @@
     font-size: 24px;
     line-height: 28px;
     color: var(--white);
+}
+
+.menuOptions {
+    position: absolute;
+    left: 0;
+    top: 80px;
 }

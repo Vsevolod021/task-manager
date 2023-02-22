@@ -7,11 +7,13 @@ import {
     Arrow,
     Modal,
     DeskCreation,
+    DropDownList,
 } from '../../components';
 import logo from '../../assets/logo.svg';
 import avatar from '../../assets/avatar.png';
 import closeIcon from '../../assets/close.svg';
 import { useSaveState } from '../../hooks/useSaveState';
+import { Link } from 'react-router-dom';
 
 type HeaderProps = {
     className?: string;
@@ -25,7 +27,9 @@ export const Header: FC<HeaderProps> = ({ className }) => {
     return (
         <header className={cn(styles.header, className)}>
             <div className={styles.headerContent}>
-                <img src={logo} alt="logo" />
+                <Link to="/">
+                    <img src={logo} alt="logo" />
+                </Link>
                 <MenuButton />
                 <Append onClick={() => setIsCreationOpened(true)} />
                 <div className={styles.avatar}>

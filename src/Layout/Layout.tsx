@@ -3,16 +3,25 @@ import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 import { Desk } from '../components';
 import { DeskInfoContextProvider } from '../contexts/deskInfo.context';
+import { ReactNode, FC } from 'react';
 
-export const Layout = () => {
+type LayoutProps = {
+    children: ReactNode;
+};
+
+export const Layout: FC<LayoutProps> = ({ children }) => {
     return (
-        <DeskInfoContextProvider deskName='' access='' color='default' isCreated={false}>
+        <DeskInfoContextProvider
+            deskName=""
+            access=""
+            color="default"
+            isCreated={false}
+        >
             <div className={styles.layout}>
                 <Header />
-                <Desk />
+                {children}
                 <Footer />
             </div>
         </DeskInfoContextProvider>
     );
-}
-
+};
