@@ -1,5 +1,5 @@
 import styles from './Header.module.scss';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import cn from 'classnames';
 import {
     Append,

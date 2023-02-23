@@ -11,17 +11,10 @@ type LayoutProps = {
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
     return (
-        <DeskInfoContextProvider
-            deskName=""
-            access=""
-            color="default"
-            isCreated={false}
-        >
-            <div className={styles.layout}>
-                <Header />
-                {children}
-                <Footer />
-            </div>
-        </DeskInfoContextProvider>
+        <div className={styles.layout}>
+            <Header />
+            {children}
+            <Footer />
+        </div>
     );
 };

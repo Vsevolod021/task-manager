@@ -6,12 +6,15 @@ import { DeskInfoContext } from '../../contexts/deskInfo.context';
 type DeskCreationProps = {
     className?: string;
     setIsCreationOpened: (isCreationOpened: boolean) => void;
-}
+};
 
-export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOpened }) => {
+export const DeskCreation: FC<DeskCreationProps> = ({
+    className,
+    setIsCreationOpened,
+}) => {
     const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple'];
 
-    const { setDeskName, setAccess, setColor, setIsCreated } = useContext(DeskInfoContext);
+    const { setDeskName, setAccess, setColor } = useContext(DeskInfoContext);
 
     const [deskColor, setDeskColor] = useState<string>('default');
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
@@ -22,11 +25,10 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOp
 
     const setDeskParams = () => {
         if (deskNameRef.current?.value && accessTypeRef.current?.value) {
-            if (setDeskName && setAccess && setColor && setIsCreated) {
+            if (setDeskName && setAccess && setColor) {
                 setDeskName(deskNameRef.current?.value);
                 setAccess(accessTypeRef.current?.value);
                 setColor(deskColor);
-                setIsCreated(true);
                 setIsCreationOpened(false);
             }
         } else {
@@ -52,7 +54,11 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOp
                         type="text"
                         placeholder="Desk name"
                     />
-                    {isDeskNameError && <span className={styles.error}>Please, type desk name</span>}
+                    {isDeskNameError && (
+                        <span className={styles.error}>
+                            Please, type desk name
+                        </span>
+                    )}
                 </div>
                 <div className={styles.selectContainer}>
                     <select
@@ -60,13 +66,16 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOp
                         name="access-type"
                         id="access-type"
                     >
-                        <option value=''>---</option>
-                        <option value='public'>public</option>
-                        <option value='private'>private</option>
+                        <option value="">---</option>
+                        <option value="public">public</option>
+                        <option value="private">private</option>
                     </select>
-                    {isAccessTypeError && <span className={styles.error}>Please, point type of access</span>}
+                    {isAccessTypeError && (
+                        <span className={styles.error}>
+                            Please, point type of access
+                        </span>
+                    )}
                 </div>
-
             </div>
             <div className={styles.color}>
                 {colorsStyles.map((c) => (
@@ -78,7 +87,9 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className, setIsCreationOp
                 ))}
             </div>
             <div className={styles.createButton}>
-                <button className={deskColor} onClick={setDeskParams}>Create Desk</button>
+                <button className={deskColor} onClick={setDeskParams}>
+                    Create Desk
+                </button>
             </div>
         </div>
     );

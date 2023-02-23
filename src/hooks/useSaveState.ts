@@ -8,7 +8,7 @@ export const useSaveState = <T>(
     saveState: (newState: T) => void,
 ) => {
     useEffect(() => {
-        const stateData = window.localStorage.getItem(stateName) || '';
+        const stateData: string = window.localStorage.getItem(stateName) || '';
         saveState(JSON.parse(stateData));
     }, []);
 

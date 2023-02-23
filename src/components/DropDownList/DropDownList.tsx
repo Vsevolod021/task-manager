@@ -12,9 +12,9 @@ export const DropDownList: FC<DropDownListProps> = ({ options, className }) => {
     return (
         <div className={cn(className, styles.wrapper)}>
             {options.map((elem) => (
-                <button className={styles.option}>
+                <div className={styles.option} key={elem.name}>
                     <Link to={elem.path}>{elem.name}</Link>
-                </button>
+                </div>
             ))}
         </div>
     );

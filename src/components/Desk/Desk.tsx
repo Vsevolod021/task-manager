@@ -7,28 +7,32 @@ import cn from 'classnames';
 
 type DeskProps = {
     className?: string;
-}
+};
 
 export const Desk: FC<DeskProps> = ({ className }) => {
-    const { deskName, access, color, isCreated } = useContext(DeskInfoContext);
+    const { deskName, access, color } = useContext(DeskInfoContext);
 
     return (
         <main className={cn(className, styles.deskContainer)}>
-            {isCreated && <>
-                <h1 className={styles.deskName}>{deskName}</h1>
-                <div className={styles.access}>
-                    <img src={(access === 'public') ? community : lock} alt="" />
-                    <span>{access}</span>
+            <h1 className={styles.deskName}>{deskName}</h1>
+            <div className={styles.access}>
+                <img src={access === 'public' ? community : lock} alt="" />
+                <span>{access}</span>
+            </div>
+            {/* <div className={styles.color}>{color}</div> */}
+            <div className={styles.deskFrame}>
+                <div className={styles.tasksFrame}>
+                    <div
+                        className={cn(styles.taskCondition, styles[color])}
+                    ></div>
+                    <div
+                        className={cn(styles.taskCondition, styles[color])}
+                    ></div>
+                    <div
+                        className={cn(styles.taskCondition, styles[color])}
+                    ></div>
                 </div>
-                {/* <div className={styles.color}>{color}</div> */}
-                <div className={styles.deskFrame}>
-                    <div className={styles.tasksFrame}>
-                        <div className={cn(styles.taskCondition, styles[color])}></div>
-                        <div className={cn(styles.taskCondition, styles[color])}></div>
-                        <div className={cn(styles.taskCondition, styles[color])}></div>
-                    </div>
-                </div>
-            </>}
+            </div>
         </main>
     );
-}
+};
