@@ -2,19 +2,17 @@ import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
 import { FC, useContext, useRef, useState } from 'react';
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
+import { creationConditionContext } from '../../contexts/creationCondition.context';
 
 type DeskCreationProps = {
     className?: string;
-    setIsCreationOpened: (isCreationOpened: boolean) => void;
 };
 
-export const DeskCreation: FC<DeskCreationProps> = ({
-    className,
-    setIsCreationOpened,
-}) => {
+export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple'];
 
     const { setDeskName, setAccess, setColor } = useContext(DeskInfoContext);
+    const { setIsCreationOpened } = useContext(creationConditionContext);
 
     const [deskColor, setDeskColor] = useState<string>('default');
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
@@ -25,7 +23,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({
 
     const setDeskParams = () => {
         if (deskNameRef.current?.value && accessTypeRef.current?.value) {
-            if (setDeskName && setAccess && setColor) {
+            if (setDeskName && setAccess && setColor && setIsCreationOpened) {
                 setDeskName(deskNameRef.current?.value);
                 setAccess(accessTypeRef.current?.value);
                 setColor(deskColor);

@@ -1,28 +1,19 @@
 import styles from './Header.module.scss';
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import cn from 'classnames';
-import {
-    Append,
-    MenuButton,
-    Arrow,
-    Modal,
-    DeskCreation,
-    DropDownList,
-} from '../../components';
+import { Append, MenuButton, Arrow } from '../../components';
 import logo from '../../assets/logo.svg';
 import avatar from '../../assets/avatar.png';
-import closeIcon from '../../assets/close.svg';
 import { useSaveState } from '../../hooks/useSaveState';
 import { Link } from 'react-router-dom';
+import { creationConditionContext } from '../../contexts/creationCondition.context';
 
 type HeaderProps = {
     className?: string;
 };
 
 export const Header: FC<HeaderProps> = ({ className }) => {
-    const [isCreationOpened, setIsCreationOpened] = useState<boolean>(false);
-
-    useSaveState('is_creation_opened', isCreationOpened, setIsCreationOpened);
+    const { setIsCreationOpened } = useContext(creationConditionContext);
 
     return (
         <header className={cn(styles.header, className)}>
@@ -31,25 +22,15 @@ export const Header: FC<HeaderProps> = ({ className }) => {
                     <img src={logo} alt="logo" />
                 </Link>
                 <MenuButton />
-                <Append onClick={() => setIsCreationOpened(true)} />
+                <Append
+                    onClick={() =>
+                        setIsCreationOpened && setIsCreationOpened(true)
+                    }
+                />
                 <div className={styles.avatar}>
                     <img src={avatar} alt="user" width="50px" height="50px" />
                 </div>
                 <Arrow className={styles.arrow} />
-                {isCreationOpened && (
-                    <Modal>
-                        <DeskCreation
-                            className={styles.deskCreation}
-                            setIsCreationOpened={setIsCreationOpened}
-                        />
-                        <img
-                            src={closeIcon}
-                            alt="close"
-                            className={styles.deskClose}
-                            onClick={() => setIsCreationOpened(false)}
-                        />
-                    </Modal>
-                )}
             </div>
         </header>
     );
