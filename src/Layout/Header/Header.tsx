@@ -13,8 +13,6 @@ type HeaderProps = {
 };
 
 export const Header: FC<HeaderProps> = ({ className }) => {
-    const { setIsCreationOpened } = useContext(creationConditionContext);
-
     return (
         <header className={cn(styles.header, className)}>
             <div className={styles.headerContent}>
@@ -22,11 +20,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
                     <img src={logo} alt="logo" />
                 </Link>
                 <MenuButton />
-                <Append
-                    onClick={() =>
-                        setIsCreationOpened && setIsCreationOpened(true)
-                    }
-                />
+                <Append />
                 <div className={styles.avatar}>
                     <img src={avatar} alt="user" width="50px" height="50px" />
                 </div>

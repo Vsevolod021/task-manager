@@ -6,3 +6,10 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.815);
 }
+
+.deskClose {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
