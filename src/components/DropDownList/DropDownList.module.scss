@@ -1,6 +1,13 @@
 .wrapper {
     min-width: 240px;
+}
+
+.primary {
     border: 1px solid var(--primary);
+}
+
+.black {
+    border: 1px solid var(--black);
 }
 
 .option {

@@ -1,9 +1,19 @@
+.wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .arrow {
+    display: block;
     width: 20px;
     height: 20px;
     border-right: 3px solid var(--black);
     border-bottom: 3px solid var(--black);
-    transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translate(-20%, -20%);
     transition: all ease-in-out 0.5s;
     cursor: pointer;
 
@@ -13,5 +23,11 @@
 }
 
 .arrowOpened {
-    transform: rotate(-135deg) translateX(-50%);
+    transform: rotate(-135deg) translate(-67%, -67%);
+}
+
+.menuOptions {
+    position: absolute;
+    top: 82px;
+    right: 0;
 }

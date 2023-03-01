@@ -31,6 +31,7 @@ export const MenuButton: FC<MenuButtonProps> = ({ className, ...props }) => {
                 <DropDownList
                     options={menuOptions}
                     className={styles.menuOptions}
+                    outline="primary"
                 />
             )}
         </button>
