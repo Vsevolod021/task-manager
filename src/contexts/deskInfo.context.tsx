@@ -37,9 +37,9 @@ export const DeskInfoContextProvider = ({
         setColorState(newColor);
     };
 
-    useSaveState('desk_name', deskNameState, setDeskNameState);
-    useSaveState('access_type', accessState, setAccessState);
-    useSaveState('color', colorState, setColorState);
+    // useSaveState('desk_name', deskNameState, setDeskNameState);
+    // useSaveState('access_type', accessState, setAccessState);
+    // useSaveState('color', colorState, setColorState);
 
     return (
         <DeskInfoContext.Provider
