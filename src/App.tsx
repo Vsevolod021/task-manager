@@ -1,7 +1,7 @@
 import { Layout } from './Layout/Layout';
 import { Route, Routes, Link } from 'react-router-dom';
 import { HomePage } from './pages/HomePage/HomePage';
-import { DesksPage } from './pages/DesksPage';
+import { DesksPage } from './pages/DesksPage/DesksPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { DeskInfoContextProvider } from './contexts/deskInfo.context';
 import { CreationConditionContextProvider } from './contexts/creationCondition.context';
