@@ -8,7 +8,7 @@ import { CreationConditionContextProvider } from './contexts/creationCondition.c
 
 function App() {
     return (
-        <DeskInfoContextProvider deskName="" access="" color="default">
+        <DeskInfoContextProvider desksInfo={[]}>
             <CreationConditionContextProvider isCreationOpened={false}>
                 <div className="App">
                     <Routes>
