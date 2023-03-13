@@ -21,21 +21,22 @@
 }
 
 .deskFrame {
-    min-height: 600px;
     width: calc(100vw - 100px);
     border: 1px solid var(--black);
     margin-top: 10px;
-    overflow: auto;
+    overflow-x: scroll;
 }
 
 .tasksFrame {
     display: flex;
+    justify-content: space-between;
     gap: 50px;
     padding: 20px;
+    min-width: 1640px;
 }
 
 .taskCondition {
-    min-width: 500px;
+    flex: 1 1 500px;
     height: 500px;
 }
 

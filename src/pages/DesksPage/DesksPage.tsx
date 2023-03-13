@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { Layout } from '../../Layout/Layout';
 import styles from './DesksPage.module.scss';
@@ -16,11 +17,13 @@ export const DesksPage = () => {
                 <h1 className={styles.title}>All desks</h1>
                 <div className={styles.desks}>
                     {desksInfo.map((d) => (
-                        <div className={styles.deskItem} key={d.name}>
-                            <div>{d.name}</div>
-                            <div>{d.color}</div>
-                            <div>{d.access}</div>
-                        </div>
+                        <Link to={`/desk/${d.id}`}>
+                            <div className={styles.deskItem} key={d.id}>
+                                <div>{d.name}</div>
+                                <div>{d.color}</div>
+                                <div>{d.access}</div>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>

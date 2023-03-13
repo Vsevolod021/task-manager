@@ -27,6 +27,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                 setDesksInfo([
                     ...desksInfo,
                     {
+                        id: desksInfo.length,
                         name: deskNameRef.current?.value,
                         color: deskColor,
                         access: accessTypeRef.current?.value,

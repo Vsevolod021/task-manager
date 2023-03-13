@@ -5,6 +5,7 @@ import { DesksPage } from './pages/DesksPage/DesksPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { DeskInfoContextProvider } from './contexts/deskInfo.context';
 import { CreationConditionContextProvider } from './contexts/creationCondition.context';
+import { DeskPage } from './pages/DeskPage/DeskPage';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/desks" element={<DesksPage />} />
+                        <Route path="/desk/:id" element={<DeskPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </div>
