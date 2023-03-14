@@ -1,6 +1,5 @@
 .wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
+    width: 100vw;
     padding-bottom: 50px;
 }
 
@@ -14,18 +13,13 @@
     justify-content: center;
     flex-direction: column;
     gap: 30px;
-
-    & > a {
-        text-decoration: none;
-        display: block;
-    }
 }
 
 .deskItem {
+    margin: 0 auto;
     width: 1000px;
     height: 150px;
     border: 2px solid var(--primary);
     cursor: pointer;
-    text-decoration: none;
     color: black;
 }

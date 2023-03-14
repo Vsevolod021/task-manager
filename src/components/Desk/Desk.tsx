@@ -4,7 +4,7 @@ import lock from '../../assets/lock.svg';
 import styles from './Desk.module.scss';
 import { FC, useContext } from 'react';
 import cn from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 
 type DeskProps = {
     className?: string;
@@ -13,6 +13,10 @@ type DeskProps = {
 export const Desk: FC<DeskProps> = ({ className }) => {
     const { desksInfo } = useContext(DeskInfoContext);
     const { id } = useParams<{ id?: string }>();
+
+    if (!id || !desksInfo.map((elem) => elem.id).includes(+id)) {
+        return <Navigate to={'/notFound'} />;
+    }
 
     return (
         <main className={cn(className, styles.deskContainer)}>

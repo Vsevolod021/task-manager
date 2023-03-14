@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { FC, useContext, useRef, useState } from 'react';
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { creationConditionContext } from '../../contexts/creationCondition.context';
+import { useNavigate } from 'react-router-dom';
 
 type DeskCreationProps = {
     className?: string;
@@ -21,6 +22,8 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     const accessTypeRef = useRef<HTMLSelectElement>(null);
     const deskNameRef = useRef<HTMLInputElement>(null);
 
+    const navigate = useNavigate();
+
     const setDeskParams = () => {
         if (deskNameRef.current?.value && accessTypeRef.current?.value) {
             if (setDesksInfo && setIsCreationOpened) {
@@ -34,6 +37,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     },
                 ]);
                 setIsCreationOpened(false);
+                navigate(`/desk/${desksInfo.length}`);
             }
         } else {
             if (!deskNameRef.current?.value) {

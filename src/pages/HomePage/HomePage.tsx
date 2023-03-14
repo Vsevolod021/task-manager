@@ -7,10 +7,10 @@ import styles from './HomePage.module.scss';
 export const HomePage = () => {
     return (
         <Layout>
-            <div className={styles.wrapper}>
+            <main className={styles.wrapper}>
                 <h1 className={styles.title}>Create your desk here</h1>
                 <Append size="big" />
-            </div>
+            </main>
         </Layout>
     );
 };
