@@ -1,9 +1,11 @@
-import styles from './Layout.module.scss';
+import { ReactNode, FC, useContext } from 'react';
+
+import { creationConditionContext } from '../contexts/creationCondition.context';
+import { Desk, DeskCreation, Modal } from '../components';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { Desk, DeskCreation, Modal } from '../components';
-import { ReactNode, FC, useContext } from 'react';
-import { creationConditionContext } from '../contexts/creationCondition.context';
+
+import styles from './Layout.module.scss';
 
 type LayoutProps = {
     children: ReactNode;

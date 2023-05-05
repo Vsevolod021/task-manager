@@ -1,10 +1,14 @@
+import { useParams, Navigate } from 'react-router-dom';
+import { FC, useContext } from 'react';
+
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
+import { TaskCondition } from '..';
+
 import community from '../../assets/community.svg';
 import lock from '../../assets/lock.svg';
+
 import styles from './Desk.module.scss';
-import { FC, useContext } from 'react';
 import cn from 'classnames';
-import { useParams, Navigate } from 'react-router-dom';
 
 type DeskProps = {
     className?: string;
@@ -37,24 +41,9 @@ export const Desk: FC<DeskProps> = ({ className }) => {
                     {/* <div className={styles.color}>{color}</div> */}
                     <div className={styles.deskFrame}>
                         <div className={styles.tasksFrame}>
-                            <div
-                                className={cn(
-                                    styles.taskCondition,
-                                    styles[desksInfo[+id]?.color],
-                                )}
-                            ></div>
-                            <div
-                                className={cn(
-                                    styles.taskCondition,
-                                    styles[desksInfo[+id]?.color],
-                                )}
-                            ></div>
-                            <div
-                                className={cn(
-                                    styles.taskCondition,
-                                    styles[desksInfo[+id]?.color],
-                                )}
-                            ></div>
+                            <TaskCondition title="To Do" id={+id} />
+                            <TaskCondition title="In Progress" id={+id} />
+                            <TaskCondition title="Done" id={+id} />
                         </div>
                     </div>
                 </>

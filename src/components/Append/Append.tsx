@@ -1,7 +1,9 @@
-import cn from 'classnames';
-import styles from './Append.module.scss';
 import { FC, useContext } from 'react';
+
 import { creationConditionContext } from '../../contexts/creationCondition.context';
+
+import styles from './Append.module.scss';
+import cn from 'classnames';
 
 type AppendProps = {
     className?: string;

@@ -1,7 +1,9 @@
-import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { Layout } from '../../Layout/Layout';
+
 import styles from './DesksPage.module.scss';
 
 export const DesksPage = () => {

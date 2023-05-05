@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import { FC } from 'react';
+
 import styles from './DropDownList.module.scss';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
 
 type DropDownListProps = {
     options: { name: string; path: string }[];

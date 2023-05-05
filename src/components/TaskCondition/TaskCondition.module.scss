@@ -1,0 +1,56 @@
+.taskCondition {
+    flex: 1 1 500px;
+    height: 500px;
+}
+
+.conditionTitle {
+    padding: 5px;
+}
+
+.default {
+    border: 2px solid var(--black);
+
+    .conditionTitle {
+        border-bottom: 2px solid var(--black);
+    }
+}
+
+.red {
+    border: 2px solid rgb(246, 98, 98);
+
+    .conditionTitle {
+        border-bottom: 2px solid rgb(246, 98, 98);
+    }
+}
+
+.yellow {
+    border: 2px solid rgb(255, 190, 69);
+
+    .conditionTitle {
+        border-bottom: 2px solid rgb(255, 190, 69);
+    }
+}
+
+.blue {
+    border: 2px solid rgb(82, 82, 255);
+
+    .conditionTitle {
+        border-bottom: 2px solid rgb(82, 82, 255);
+    }
+}
+
+.pink {
+    border: 2px solid rgb(253, 170, 184);
+
+    .conditionTitle {
+        border-bottom: 2px solid rgb(253, 170, 184);
+    }
+}
+
+.purple {
+    border: 2px solid rgb(255, 117, 255);
+
+    .conditionTitle {
+        border-bottom: 2px solid rgb(255, 117, 255);
+    }
+}

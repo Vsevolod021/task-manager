@@ -1,4 +1,5 @@
 import { Layout } from '../../Layout/Layout';
+
 import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage = () => {

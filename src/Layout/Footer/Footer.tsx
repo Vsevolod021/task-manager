@@ -1,6 +1,7 @@
-import cn from 'classnames';
-import styles from './Footer.module.scss';
 import { FC } from 'react';
+
+import styles from './Footer.module.scss';
+import cn from 'classnames';
 
 type FooterProps = {
     className?: string;
@@ -12,4 +13,4 @@ export const Footer: FC<FooterProps> = ({ className }) => {
             <span>© All rights reserved</span>
         </footer>
     );
-}
+};

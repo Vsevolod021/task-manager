@@ -1,7 +1,9 @@
 import { useContext } from 'react';
-import { Append } from '../../components';
+
 import { creationConditionContext } from '../../contexts/creationCondition.context';
 import { Layout } from '../../Layout/Layout';
+import { Append } from '../../components';
+
 import styles from './HomePage.module.scss';
 
 export const HomePage = () => {

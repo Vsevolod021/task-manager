@@ -1,8 +1,10 @@
-import styles from './Modal.module.scss';
+import { FC, ReactNode, useContext } from 'react';
+
+import { creationConditionContext } from '../../contexts/creationCondition.context';
+
 import closeIcon from '../../assets/close.svg';
 
-import { FC, ReactNode, useContext } from 'react';
-import { creationConditionContext } from '../../contexts/creationCondition.context';
+import styles from './Modal.module.scss';
 
 type ModalProps = {
     children: ReactNode;

@@ -1,7 +1,9 @@
 import { FC, useState } from 'react';
+
+import { DropDownList } from '..';
+
 import styles from './Arrow.module.scss';
 import cn from 'classnames';
-import { DropDownList } from '..';
 
 type ArrowProps = {
     className?: string;
