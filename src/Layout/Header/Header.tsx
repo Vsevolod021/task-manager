@@ -19,8 +19,12 @@ export const Header: FC<HeaderProps> = ({ className }) => {
     return (
         <header className={cn(styles.header, className)}>
             <div className={styles.headerContent}>
-                <Link to="/">
-                    <img src={logo} alt="logo" />
+                <Link to="/" className={styles.logo}>
+                    <p>
+                        TASK
+                        <br />
+                        MANAGER
+                    </p>
                 </Link>
                 <MenuButton />
                 <Append />
