@@ -1,0 +1,10 @@
+.layout {
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.deskCreation {
+    margin: 150px auto;
+}

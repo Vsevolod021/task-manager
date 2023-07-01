@@ -1,0 +1,52 @@
+.deskContainer {
+    padding: 40px;
+}
+
+.deskName {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 74px;
+    color: var(--black);
+    margin: 0;
+}
+
+.access {
+    margin-top: 5px;
+    color: var(--gray);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+}
+
+.deskFrame {
+    width: calc(100vw - 100px);
+    border: 1px solid var(--black);
+    margin-top: 10px;
+    overflow-x: scroll;
+    max-height: 600px;
+
+    &::-webkit-scrollbar-track {
+        border: none;
+        border-left: none;
+    }
+
+    @media (min-height: 1000px) {
+        max-height: 800px;
+    }
+    @media (min-height: 1400px) {
+        max-height: 1000px;
+    }
+    @media (min-height: 1600px) {
+        max-height: 100%;
+    }
+}
+
+.tasksFrame {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 20px;
+    min-width: 1640px;
+}

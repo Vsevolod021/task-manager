@@ -1,0 +1,52 @@
+.wrapper {
+    width: 100%;
+    height: 60px;
+    margin: 20px 0;
+    padding: 0 20px;
+
+    background: none;
+    border: none;
+    display: block;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    opacity: 0.1;
+
+    transition: 0.3s ease-in-out;
+
+    cursor: pointer;
+
+    &:hover {
+        background: var(--gray-light);
+        opacity: 1;
+    }
+}
+
+.hr {
+    width: 25px;
+    height: 3px;
+}
+
+.vr {
+    height: 25px;
+    width: 3px;
+}
+
+.vr,
+.hr {
+    position: absolute;
+    background: var(--black);
+    left: 62%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+.text {
+    position: absolute;
+    left: 67%;
+    font-size: 25px;
+}
