@@ -4,6 +4,7 @@ export * from './DeskCreation/DeskCreation';
 export * from './DropDownList/DropDownList';
 export * from './MenuButton/MenuButton';
 export * from './FormButton/FormButton';
+export * from './LeaveAuth/LeaveAuth';
 export * from './FormInput/FormInput';
 export * from './TaskCard/TaskCard';
 export * from './Append/Append';

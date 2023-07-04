@@ -17,6 +17,15 @@
         margin-bottom: 20px;
     }
 
+    .isRegistrated {
+        margin-bottom: 5px;
+
+        a {
+            color: green;
+            text-decoration: none;
+        }
+    }
+
     input,
     button {
         display: block;

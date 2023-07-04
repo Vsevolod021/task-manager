@@ -28,7 +28,7 @@ export const MenuButton: FC<MenuButtonProps> = ({ className, ...props }) => {
                 <div className={styles.line}></div>
                 <div className={styles.line}></div>
             </div>
-            <span className={styles.buttonText}>Menu</span>
+            <span className={styles.buttonText}>Меню</span>
             {isMenuOpened && (
                 <DropDownList
                     options={menuOptions}
