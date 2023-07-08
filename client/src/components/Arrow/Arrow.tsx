@@ -1,20 +1,34 @@
 import { FC, useState } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
 import { DropDownList } from '..';
 
 import styles from './Arrow.module.scss';
 import cn from 'classnames';
+import { setUserName, toggleIsAuth } from '../../store/AuthSlice';
 
 type ArrowProps = {
     className?: string;
 };
 
 export const Arrow: FC<ArrowProps> = ({ className }) => {
+    const dispatch = useAppDispatch();
+
     const [isArrowOpened, setIsArrowOpened] = useState<boolean>(false);
+
+    const userName = useAppSelector((state) => state.Auth.userName);
+    const isAuth = useAppSelector((state) => state.Auth.isAuth);
+
+    const sighOut = () => {
+        dispatch(toggleIsAuth(isAuth));
+        dispatch(setUserName(''));
+    };
+
     const menuOptions = [
-        { name: 'Second Name, Name', path: '/' },
+        { name: userName, path: '/' },
         { name: 'Edit Profile', path: '*' },
-        { name: 'Sign out', path: '*' },
+        { name: 'Sign out', path: '/login', onClick: sighOut },
     ];
 
     return (

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import userAPIInterface from '../../interfaces/userAPI.interface';
 import { login } from '../../http/userAPI';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsAuth } from '../../store/AuthSlice';
+import { toggleIsAuth, setUserName } from '../../store/AuthSlice';
 
 import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Layout } from '../../Layout/Layout';
@@ -23,8 +24,8 @@ export const LoginPage = () => {
     const authorize = async () => {
         try {
             const data = await login(email, password);
-            console.log(data);
             dispatch(toggleIsAuth(isAuth));
+            dispatch(setUserName(data?.name));
             navigate('/');
         } catch (e: any) {
             alert(e.response.data.message);
