@@ -24,8 +24,7 @@ export const RegistrationPage = () => {
             const data = await registration(name, email, password);
             dispatch(toggleIsAuth(isAuth));
             dispatch(setUserName(data?.name));
-            console.log(isAuth);
-            navigate('/');
+            navigate(`/user/${data?.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }

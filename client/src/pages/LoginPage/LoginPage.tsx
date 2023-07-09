@@ -26,7 +26,7 @@ export const LoginPage = () => {
             const data = await login(email, password);
             dispatch(toggleIsAuth(isAuth));
             dispatch(setUserName(data?.name));
-            navigate('/');
+            navigate(`/user/${data?.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }
