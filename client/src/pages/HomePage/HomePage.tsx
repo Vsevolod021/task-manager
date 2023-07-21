@@ -10,8 +10,7 @@ export const HomePage = () => {
     return (
         <Layout>
             <main className={styles.wrapper}>
-                <h1 className={styles.title}>Create your desk here</h1>
-                <Append size="big" />
+                <h1>Welcome to Task Manager</h1>
             </main>
         </Layout>
     );

@@ -23,6 +23,8 @@ export const Arrow: FC<ArrowProps> = ({ className }) => {
     const sighOut = () => {
         dispatch(toggleIsAuth(isAuth));
         dispatch(setUserName(''));
+
+        localStorage.clear();
     };
 
     const menuOptions = [

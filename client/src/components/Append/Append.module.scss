@@ -6,6 +6,8 @@
     position: relative;
     cursor: pointer;
     transition: all ease-in-out 0.5s;
+    left: 50%;
+    transform: translateX(-50%);
 
     &:hover {
         border-color: var(--gray);

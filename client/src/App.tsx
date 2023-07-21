@@ -1,10 +1,14 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { Provider } from 'react-redux';
 import store from './store';
 
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+
 import { CreationConditionContextProvider } from './contexts/creationCondition.context';
 import { DeskInfoContextProvider } from './contexts/deskInfo.context';
+
+import { AppRouter } from './router/AppRouter';
 
 import {
     NotFoundPage,
@@ -15,32 +19,15 @@ import {
     RegistrationPage,
     ProfilePage,
 } from './pages/index';
+import { check } from './http/userAPI';
+import { setUserName, toggleIsAuth } from './store/AuthSlice';
 
 function App() {
-    const app = () => {
-        return (
-            <>
-                <Routes>
-                    <Route path="/user/:id" element={<HomePage />} />
-                    <Route path="/user/profile" element={<ProfilePage />} />
-                    <Route path="/desks" element={<DesksPage />} />
-                    <Route path="/desk/:id" element={<DeskPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route
-                        path="/registration"
-                        element={<RegistrationPage />}
-                    />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-            </>
-        );
-    };
-
     return (
         <Provider store={store}>
             <DeskInfoContextProvider desksInfo={[]}>
                 <CreationConditionContextProvider isCreationOpened={false}>
-                    {app()}
+                    <AppRouter />
                 </CreationConditionContextProvider>
             </DeskInfoContextProvider>
         </Provider>

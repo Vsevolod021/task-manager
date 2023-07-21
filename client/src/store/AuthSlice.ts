@@ -17,12 +17,15 @@ const authSlice = createSlice({
         toggleIsAuth(state, action: PayloadAction<boolean>) {
             state.isAuth = !action.payload;
         },
+        setIssAuth(state, action: PayloadAction<boolean>) {
+            state.isAuth = action.payload;
+        },
         setUserName(state, action: PayloadAction<string>) {
             state.userName = action.payload;
         },
     },
 });
 
-export const { toggleIsAuth, setUserName } = authSlice.actions;
+export const { toggleIsAuth, setIssAuth, setUserName } = authSlice.actions;
 
 export default authSlice.reducer;
