@@ -11,10 +11,6 @@ import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Layout } from '../../Layout/Layout';
 import styles from './LoginPage.module.scss';
 
-// const saveToLocalStorage = (stateName: string, currentState: any) => {
-//     localStorage.setItem(stateName, JSON.stringify(currentState));
-// };
-
 export const LoginPage = () => {
     const dispatch = useAppDispatch();
 
@@ -30,9 +26,6 @@ export const LoginPage = () => {
             const data = await login(email, password);
             dispatch(toggleIsAuth(isAuth));
             dispatch(setUserName(data?.name));
-
-            // saveToLocalStorage('userName', data?.name);
-            // saveToLocalStorage('userId', data?.id);
 
             navigate(`/user/${data?.id}`);
         } catch (e: any) {
