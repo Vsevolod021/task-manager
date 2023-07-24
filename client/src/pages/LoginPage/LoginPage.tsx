@@ -5,7 +5,7 @@ import userAPIInterface from '../../interfaces/userAPI.interface';
 import { login } from '../../http/userAPI';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsAuth, setUserName } from '../../store/AuthSlice';
+import { toggleIsAuth, setUserName, setUserId } from '../../store/AuthSlice';
 
 import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Layout } from '../../Layout/Layout';
@@ -15,6 +15,7 @@ export const LoginPage = () => {
     const dispatch = useAppDispatch();
 
     const isAuth = useAppSelector((state) => state.Auth.isAuth);
+    const userId = useAppSelector((state) => state.Auth.userId);
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -26,12 +27,19 @@ export const LoginPage = () => {
             const data = await login(email, password);
             dispatch(toggleIsAuth(isAuth));
             dispatch(setUserName(data?.name));
+            dispatch(setUserId(data?.id));
 
-            navigate(`/user/${data?.id}`);
+            console.log(data.id);
+
+            navigate(`/user/${data.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }
     };
+
+    if (isAuth) {
+        navigate(`/user/${userId}`);
+    }
 
     return (
         <Layout>

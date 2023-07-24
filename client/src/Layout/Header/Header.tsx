@@ -17,13 +17,19 @@ type HeaderProps = {
 
 export const Header: FC<HeaderProps> = ({ className }) => {
     const isAuth = useAppSelector((state) => state.Auth.isAuth);
+    const userId = useAppSelector((state) => state.Auth.userId);
 
     const navigate = useNavigate();
+
+    // console.log(userId);
 
     return (
         <header className={cn(styles.header, className)}>
             <div className={styles.headerContent}>
-                <Link to="/" className={styles.logo}>
+                <Link
+                    to={isAuth ? `/user/${userId}` : '/'}
+                    className={styles.logo}
+                >
                     <p>
                         TASK
                         <br />

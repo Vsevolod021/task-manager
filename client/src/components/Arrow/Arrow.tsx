@@ -7,12 +7,15 @@ import { DropDownList } from '..';
 import styles from './Arrow.module.scss';
 import cn from 'classnames';
 import { setUserName, toggleIsAuth } from '../../store/AuthSlice';
+import { useNavigate } from 'react-router-dom';
 
 type ArrowProps = {
     className?: string;
 };
 
 export const Arrow: FC<ArrowProps> = ({ className }) => {
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
 
     const [isArrowOpened, setIsArrowOpened] = useState<boolean>(false);
@@ -25,12 +28,14 @@ export const Arrow: FC<ArrowProps> = ({ className }) => {
         dispatch(setUserName(''));
 
         localStorage.clear();
+
+        navigate('/login');
     };
 
     const menuOptions = [
-        { name: userName, path: '/' },
-        { name: 'Edit Profile', path: '*' },
-        { name: 'Sign out', path: '/login', onClick: sighOut },
+        { name: userName },
+        { name: 'Edit Profile', onClick: () => navigate('*') },
+        { name: 'Sign out', onClick: sighOut },
     ];
 
     return (

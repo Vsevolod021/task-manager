@@ -1,5 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
+import { useAppSelector } from '../../hooks/redux';
 
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { Layout } from '../../Layout/Layout';
@@ -9,7 +11,18 @@ import { Append } from '../../components';
 
 export const DesksPage = () => {
     const { desksInfo } = useContext(DeskInfoContext);
+
+    const userId = useAppSelector((state) => state.Auth.userId);
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
+
+    useEffect(() => {
+        if (parseInt(path.slice(6)) !== userId) {
+            navigate(`/user/${userId}`);
+        }
+    }, [userId]);
 
     return (
         <Layout>

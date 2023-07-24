@@ -1,6 +1,5 @@
-import { useContext, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { Layout } from '../../Layout/Layout';
 import { Desk } from '../../components';
 

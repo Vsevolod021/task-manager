@@ -35,19 +35,19 @@ export const authRoutes = [
 
 export const publicRoutes = [
     {
-        path: REGISTRATION_ROUTE,
-        Component: RegistrationPage,
-    },
-    {
-        path: LOGIN_ROUTE,
-        Component: LoginPage,
-    },
-    {
         path: HOME_ROUTE,
         Component: HomePage,
     },
     {
         path: NOTFOUND_ROUTE,
         Component: NotFoundPage,
+    },
+    {
+        path: REGISTRATION_ROUTE,
+        Component: RegistrationPage,
+    },
+    {
+        path: LOGIN_ROUTE,
+        Component: LoginPage,
     },
 ];

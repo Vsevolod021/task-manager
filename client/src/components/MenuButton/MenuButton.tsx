@@ -3,19 +3,21 @@ import { FC, useState } from 'react';
 import { DropDownList } from '..';
 
 import styles from './MenuButton.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 type MenuButtonProps = {
     className?: string;
 };
 
 export const MenuButton: FC<MenuButtonProps> = ({ className, ...props }) => {
-    const menuOptions = [
-        { name: 'All Desks', path: '/desks' },
-        { name: 'Notifications', path: '*' },
-        { name: 'Settings', path: '*' },
-    ];
-
+    const navigate = useNavigate();
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+
+    const menuOptions = [
+        { name: 'All Desks', onClick: () => navigate('*') },
+        { name: 'Notifications', onClick: () => navigate('*') },
+        { name: 'Settings', onClick: () => navigate('*') },
+    ];
 
     return (
         <button

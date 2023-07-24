@@ -13,17 +13,13 @@
 .option {
     display: block;
     height: 45px;
+    width: 100%;
     text-align: start;
     background: var(--white);
     border: none;
     padding: 15px 10px;
 
     font-size: 20px;
-
-    & > a {
-        text-decoration: none;
-        color: var(--black);
-    }
 
     &:hover {
         background: var(--gray-light);

@@ -5,7 +5,7 @@ import styles from './DropDownList.module.scss';
 import cn from 'classnames';
 
 type DropDownListProps = {
-    options: { name: string; path: string; onClick?: () => void }[];
+    options: { name: string; onClick?: () => void }[];
     outline: 'primary' | 'black';
     className?: string;
 };
@@ -23,13 +23,13 @@ export const DropDownList: FC<DropDownListProps> = ({
             })}
         >
             {options.map((elem) => (
-                <div
+                <button
                     className={styles.option}
                     key={elem.name}
                     onClick={elem.onClick}
                 >
-                    <Link to={elem.path}>{elem.name}</Link>
-                </div>
+                    {elem.name}
+                </button>
             ))}
         </div>
     );

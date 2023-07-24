@@ -1,27 +1,31 @@
 import React, { ReactNode, useEffect } from 'react';
 
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import {
+    Navigate,
+    Route,
+    Routes,
+    useLocation,
+    useNavigate,
+} from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { NOTFOUND_ROUTE } from '../utils/consts';
 
 import { authRoutes, publicRoutes } from './routes';
 import { check } from '../http/userAPI';
-import { setUserName, setIsAuth } from '../store/AuthSlice';
+import { setUserName, setIsAuth, setUserId } from '../store/AuthSlice';
 
 export const AppRouter = () => {
     const dispatch = useAppDispatch();
+
     const isAuth: boolean = localStorage.getItem('token') ? true : false;
-
-    const location = useLocation();
-
-    console.log(location);
 
     useEffect(() => {
         check()
             .then((data) => {
                 dispatch(setIsAuth(true));
                 dispatch(setUserName(data?.name));
+                dispatch(setUserId(data?.id));
             })
             .catch((err) => console.log(err));
     }, []);

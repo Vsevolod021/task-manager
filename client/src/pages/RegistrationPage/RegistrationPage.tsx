@@ -6,12 +6,13 @@ import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Link, useNavigate } from 'react-router-dom';
 import { registration } from '../../http/userAPI';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setUserName, toggleIsAuth } from '../../store/AuthSlice';
+import { setUserId, setUserName, toggleIsAuth } from '../../store/AuthSlice';
 
 export const RegistrationPage = () => {
     const dispatch = useAppDispatch();
 
     const isAuth = useAppSelector((state) => state.Auth.isAuth);
+    const userId = useAppSelector((state) => state.Auth.isAuth);
 
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -24,11 +25,17 @@ export const RegistrationPage = () => {
             const data = await registration(name, email, password);
             dispatch(toggleIsAuth(isAuth));
             dispatch(setUserName(data?.name));
+            dispatch(setUserId(data?.id));
+
             navigate(`/user/${data?.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }
     };
+
+    if (isAuth) {
+        navigate(`/user/${userId}`);
+    }
 
     return (
         <Layout>
