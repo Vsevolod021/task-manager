@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import deskController from '../controllers/deskController';
+import deskController from '../controllers/deskController.js';
 
 const router = new Router();
 

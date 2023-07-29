@@ -21,8 +21,6 @@ export const Header: FC<HeaderProps> = ({ className }) => {
 
     const navigate = useNavigate();
 
-    // console.log(userId);
-
     return (
         <header className={cn(styles.header, className)}>
             <div className={styles.headerContent}>

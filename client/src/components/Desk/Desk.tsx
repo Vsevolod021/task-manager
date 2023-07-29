@@ -23,8 +23,6 @@ export const Desk: FC<DeskProps> = ({ className }) => {
     }
 
     const appendTask = () => {
-        // console.log(desksInfo.slice(0, -1));
-
         setDesksInfo &&
             setDesksInfo([
                 ...desksInfo.slice(0, -1),

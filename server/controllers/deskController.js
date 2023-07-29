@@ -1,16 +1,23 @@
 import { Desk } from '../models/models';
+import ApiError from '../error/ApiError';
 
 class DeskController {
     async create(req, res) {
-        const { name, userId } = req.body;
-        const brand = await Desk.create({ name, userId });
-        return res.json(brand);
+        try {
+            const { name, userId } = req.body;
+            const desk = await Desk.create({ name, userId });
+            return res.json(desk);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
     }
-
     async getAll(req, res) {
-        let { brandId, typeId, limit, page } = req.query;
+        let { userId } = req.body;
+        let desks = await Desk.findAll({
+            where: { userId },
+        });
+        return res.json(desks);
     }
-
     async getOne(req, res) {
         const { id } = req.params;
         const desk = await Desk.findOne({
