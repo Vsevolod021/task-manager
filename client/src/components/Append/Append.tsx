@@ -1,9 +1,9 @@
-import { FC, useContext } from 'react';
-
-import { creationConditionContext } from '../../contexts/creationCondition.context';
+import { FC } from 'react';
 
 import styles from './Append.module.scss';
 import cn from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { toggleIsOpened } from '../../store/ModalSlice';
 
 type AppendProps = {
     className?: string;
@@ -15,7 +15,9 @@ export const Append: FC<AppendProps> = ({
     size = 'small',
     ...props
 }) => {
-    const { setIsCreationOpened } = useContext(creationConditionContext);
+    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
+
+    const dispatch = useAppDispatch();
 
     return (
         <button
@@ -23,7 +25,7 @@ export const Append: FC<AppendProps> = ({
                 [styles.smallBtn]: size === 'small',
                 [styles.bigBtn]: size === 'big',
             })}
-            onClick={() => setIsCreationOpened && setIsCreationOpened(true)}
+            onClick={() => dispatch(toggleIsOpened(isModalOpened))}
             {...props}
         >
             <div className={styles.hr} />

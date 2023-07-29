@@ -1,23 +1,21 @@
-import { ReactNode, FC, useContext } from 'react';
+import { ReactNode, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { creationConditionContext } from '../contexts/creationCondition.context';
-import { Desk, DeskCreation, Modal } from '../components';
+import { DeskCreation, Modal } from '../components';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 
 import cn from 'classnames';
 
 import styles from './Layout.module.scss';
+import { useAppSelector } from '../hooks/redux';
 
 type LayoutProps = {
     children: ReactNode;
 };
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
-    const { isCreationOpened, setIsCreationOpened } = useContext(
-        creationConditionContext,
-    );
+    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
 
     const location = useLocation();
 
@@ -33,7 +31,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
             {isAuthRoute ? <></> : <Header />}
             {children}
             <Footer />
-            {isCreationOpened && setIsCreationOpened && (
+            {isModalOpened && (
                 <Modal>
                     <DeskCreation className={styles.deskCreation} />
                 </Modal>

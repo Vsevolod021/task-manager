@@ -1,17 +1,19 @@
-import { FC, ReactNode, useContext } from 'react';
-
-import { creationConditionContext } from '../../contexts/creationCondition.context';
+import { FC, ReactNode } from 'react';
 
 import closeIcon from '../../assets/close.svg';
 
 import styles from './Modal.module.scss';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { toggleIsOpened } from '../../store/ModalSlice';
 
 type ModalProps = {
     children: ReactNode;
 };
 
 export const Modal: FC<ModalProps> = ({ children }) => {
-    const { setIsCreationOpened } = useContext(creationConditionContext);
+    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
+
+    const dispatch = useAppDispatch();
 
     return (
         <div className={styles.modal}>
@@ -20,9 +22,7 @@ export const Modal: FC<ModalProps> = ({ children }) => {
                 src={closeIcon}
                 alt="close"
                 className={styles.deskClose}
-                onClick={() =>
-                    setIsCreationOpened && setIsCreationOpened(false)
-                }
+                onClick={() => dispatch(toggleIsOpened(isModalOpened))}
             />
         </div>
     );

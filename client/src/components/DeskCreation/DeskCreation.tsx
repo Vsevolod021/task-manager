@@ -1,11 +1,12 @@
 import { FC, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { creationConditionContext } from '../../contexts/creationCondition.context';
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 
 import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { toggleIsOpened } from '../../store/ModalSlice';
 
 type DeskCreationProps = {
     className?: string;
@@ -15,7 +16,10 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple'];
 
     const { desksInfo, setDesksInfo } = useContext(DeskInfoContext);
-    const { setIsCreationOpened } = useContext(creationConditionContext);
+
+    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
+
+    const dispatch = useAppDispatch();
 
     const [deskColor, setDeskColor] = useState<string>('default');
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
@@ -28,7 +32,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     const setDeskParams = () => {
         if (deskNameRef.current?.value && accessTypeRef.current?.value) {
-            if (setDesksInfo && setIsCreationOpened) {
+            if (setDesksInfo) {
                 setDesksInfo([
                     ...desksInfo,
                     {
@@ -38,7 +42,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                         access: accessTypeRef.current?.value,
                     },
                 ]);
-                setIsCreationOpened(false);
+                dispatch(toggleIsOpened(isModalOpened));
                 navigate(`/desk/${desksInfo.length}`);
             }
         } else {
