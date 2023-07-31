@@ -9,6 +9,12 @@ const User = sequelize.define('user', {
     password: { type: DataTypes.STRING },
 });
 
+const Workspace = sequelize.define('workspace', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    theme: { type: DataTypes.STRING, allowNull: false },
+    color: { type: DataTypes.STRING, allowNull: false },
+});
+
 const Desk = sequelize.define('desk', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
@@ -41,6 +47,9 @@ const TaskInfo = sequelize.define('task_info', {
 User.hasMany(Desk);
 Desk.belongsTo(User);
 
+User.hasOne(Workspace);
+Workspace.belongsTo(User);
+
 Desk.hasMany(WorkSprint);
 WorkSprint.belongsTo(Desk);
 
@@ -56,5 +65,5 @@ Task.belongsTo(TaskCondition);
 Task.hasOne(TaskInfo, { as: 'info' });
 TaskInfo.belongsTo(Task);
 
-export default { User, Desk, WorkSprint, TaskCondition, Task, TaskInfo };
-export { User, Desk, WorkSprint, TaskCondition, Task, TaskInfo };
+export default { User, Desk, WorkSprint, TaskCondition, Task, TaskInfo, Workspace };
+export { User, Desk, WorkSprint, TaskCondition, Task, TaskInfo, Workspace };

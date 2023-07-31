@@ -1,5 +1,5 @@
-import { Desk } from '../models/models';
-import ApiError from '../error/ApiError';
+import { Desk } from '../models/models.js';
+import ApiError from '../error/ApiError.js';
 
 class DeskController {
     async create(req, res) {
