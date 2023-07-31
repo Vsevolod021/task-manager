@@ -34,8 +34,8 @@ export const Arrow: FC<ArrowProps> = ({ className }) => {
 
     const menuOptions = [
         { name: userName },
-        { name: 'Edit Profile', onClick: () => navigate('*') },
-        { name: 'Sign out', onClick: sighOut },
+        { name: 'Профиль', onClick: () => navigate('/profile') },
+        { name: 'Выйти', onClick: sighOut },
     ];
 
     return (

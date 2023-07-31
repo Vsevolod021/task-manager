@@ -81,8 +81,8 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                         id="access-type"
                     >
                         <option value="">---</option>
-                        <option value="public">public</option>
-                        <option value="private">private</option>
+                        <option value="public">публичная</option>
+                        <option value="private">приватная</option>
                     </select>
                     {isAccessTypeError && (
                         <span className={styles.error}>

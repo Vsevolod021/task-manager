@@ -6,7 +6,7 @@ export const HomePage = () => {
     return (
         <Layout>
             <main className={styles.wrapper}>
-                <h1>Welcome to Task Manager</h1>
+                <h1>Добро пожаловать в TASK MANAGER</h1>
             </main>
         </Layout>
     );

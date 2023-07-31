@@ -46,7 +46,7 @@ export const DesksPage = () => {
                     </>
                 ) : (
                     <>
-                        <h1 className={styles.title}>Create your desk here</h1>
+                        <h1 className={styles.title}>Создайте рабочую доску</h1>
                         <Append size="big" />
                     </>
                 )}

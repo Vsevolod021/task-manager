@@ -14,9 +14,9 @@ export const MenuButton: FC<MenuButtonProps> = ({ className, ...props }) => {
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 
     const menuOptions = [
-        { name: 'All Desks', onClick: () => navigate('*') },
-        { name: 'Notifications', onClick: () => navigate('*') },
-        { name: 'Settings', onClick: () => navigate('*') },
+        { name: 'Все доски', onClick: () => navigate('*') },
+        { name: 'Уведомления', onClick: () => navigate('*') },
+        { name: 'Настройки', onClick: () => navigate('*') },
     ];
 
     return (
