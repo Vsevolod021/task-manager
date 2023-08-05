@@ -6,7 +6,7 @@ import authReducer from './AuthSlice';
 
 const store = configureStore({
     reducer: {
-        WorkspaceSlice: workspaceReducer,
+        Workspace: workspaceReducer,
         Modal: modalReducer,
         Auth: authReducer,
     },

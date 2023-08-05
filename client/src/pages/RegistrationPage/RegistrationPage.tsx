@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { registration } from '../../http/userAPI';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setUserId, setUserName, toggleIsAuth } from '../../store/AuthSlice';
+import { createWorkspace } from '../../http/workspaceAPI';
+import { setWorkspace } from '../../store/WorkspaceSlice';
 
 export const RegistrationPage = () => {
     const dispatch = useAppDispatch();
@@ -22,12 +24,25 @@ export const RegistrationPage = () => {
 
     const authorize = async () => {
         try {
-            const data = await registration(name, email, password);
+            const userData = await registration(name, email, password);
             dispatch(toggleIsAuth(isAuth));
-            dispatch(setUserName(data?.name));
-            dispatch(setUserId(data?.id));
+            dispatch(setUserName(userData?.name));
+            dispatch(setUserId(userData?.id));
 
-            navigate(`/user/${data?.id}`);
+            const workspaceData = await createWorkspace(
+                'light',
+                'default',
+                userData.id,
+            );
+
+            dispatch(
+                setWorkspace({
+                    theme: workspaceData.theme,
+                    color: workspaceData.color,
+                }),
+            );
+
+            navigate(`/user/${userData?.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Workspace = {
-    theme: 'light' | 'dark';
+    theme: string;
     color: string;
 };
 

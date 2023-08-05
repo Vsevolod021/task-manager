@@ -1,9 +1,8 @@
 import workspaceAPIInterface from '../interfaces/userData.interface';
-import { $authHost, $host } from './index';
-import jwt_decode from 'jwt-decode';
+import { $authHost } from './index';
 
-export const create = async (
-    theme: 'light' | 'dark',
+export const createWorkspace = async (
+    theme: string,
     color: string,
     userId: number,
 ): Promise<workspaceAPIInterface> => {
@@ -15,10 +14,10 @@ export const create = async (
     return data;
 };
 
-export const change = async (
-    theme: 'light' | 'dark',
+export const changeWorkspace = async (
+    theme: string,
     color: string,
-    userId: number,
+    userId: number | null,
 ): Promise<workspaceAPIInterface> => {
     const { data } = await $authHost.post('api/workspace/change', {
         theme,

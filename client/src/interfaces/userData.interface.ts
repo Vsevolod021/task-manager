@@ -8,7 +8,7 @@ export default interface userAPIInterface {
 
 export default interface workspaceAPIInterface {
     id: number;
-    theme: 'light' | 'dark';
+    theme: string;
     color: string;
     createdAt: Date;
     updatedAt: Date;

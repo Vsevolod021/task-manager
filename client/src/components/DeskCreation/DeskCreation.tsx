@@ -70,7 +70,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     />
                     {isDeskNameError && (
                         <span className={styles.error}>
-                            Please, type desk name
+                            Пожалуйста, укажите название доски
                         </span>
                     )}
                 </div>
@@ -86,23 +86,14 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     </select>
                     {isAccessTypeError && (
                         <span className={styles.error}>
-                            Please, point type of access
+                            Пожалуйста, укажите тип доступа
                         </span>
                     )}
                 </div>
             </div>
-            <div className={styles.color}>
-                {colorsStyles.map((c) => (
-                    <button
-                        className={cn(styles[c], styles.colorButton)}
-                        key={c}
-                        onClick={() => setDeskColor(c)}
-                    ></button>
-                ))}
-            </div>
             <div className={styles.createButton}>
                 <button className={deskColor} onClick={setDeskParams}>
-                    Create Desk
+                    Создать доску
                 </button>
             </div>
         </div>
