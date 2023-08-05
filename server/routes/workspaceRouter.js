@@ -6,6 +6,6 @@ const router = new Router();
 
 router.post('/create', workspaceController.create);
 router.post('/change', workspaceController.change);
-router.get('/', workspaceController.getOne);
+router.get('/get/:userId', workspaceController.getOne);
 
 export default router;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import userAPIInterface from '../../interfaces/userAPI.interface';
+import userAPIInterface from '../../interfaces/userData.interface';
 import { login } from '../../http/userAPI';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -10,6 +10,7 @@ import { toggleIsAuth, setUserName, setUserId } from '../../store/AuthSlice';
 import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Layout } from '../../Layout/Layout';
 import styles from './LoginPage.module.scss';
+import { setWorkspace } from '../../store/WorkspaceSlice';
 
 export const LoginPage = () => {
     const dispatch = useAppDispatch();
@@ -29,8 +30,12 @@ export const LoginPage = () => {
             dispatch(setUserName(data?.name));
             dispatch(setUserId(data?.id));
 
-            console.log(data.id);
-
+            dispatch(
+                setWorkspace({
+                    theme: data.theme,
+                    color: data.color,
+                }),
+            );
             navigate(`/user/${data.id}`);
         } catch (e: any) {
             alert(e.response.data.message);

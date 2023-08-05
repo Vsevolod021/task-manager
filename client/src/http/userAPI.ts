@@ -1,4 +1,4 @@
-import userAPIInterface from '../interfaces/userAPI.interface';
+import userAPIInterface from '../interfaces/userData.interface';
 import { $authHost, $host } from './index';
 import jwt_decode from 'jwt-decode';
 

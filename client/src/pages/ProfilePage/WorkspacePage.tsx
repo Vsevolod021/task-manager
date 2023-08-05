@@ -1,40 +1,20 @@
 import { Layout } from '../../Layout/Layout';
 
-import { FormButton, FormInput } from '../../components';
+import { FormButton } from '../../components';
 
 import cn from 'classnames';
-import styles from './ProfilePage.module.scss';
+import styles from './WorkspacePage.module.scss';
 
-export const ProfilePage = () => {
+export const WorkspacePage = () => {
     const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple', 'default'];
 
     return (
         <Layout>
             <main className={styles.wrapper}>
-                <h1 className={styles.title}>Редактирование профиля</h1>
+                <h1 className={styles.title}>Редактирование рабочей среды</h1>
                 <div className={styles.content}>
-                    <h2 className={styles.fieldName}>Имя пользователя:</h2>
-                    <h2 className={styles.fieldName}>E-mail:</h2>
                     <h2 className={styles.fieldName}>Тема:</h2>
                     <h2 className={styles.fieldName}>Цвет среды:</h2>
-                    <FormButton
-                        className={styles.saveButton}
-                        onClick={() => console.log('hello')}
-                    >
-                        Сохранить
-                    </FormButton>
-                    <FormInput
-                        placeholder="Имя"
-                        type="password"
-                        value="Seva"
-                        className={styles.nameInput}
-                    />
-                    <FormInput
-                        placeholder="Имейл"
-                        type="password"
-                        value="seva@taskm.com"
-                        className={styles.emailInput}
-                    />
                     <select
                         name="theme-type"
                         id="theme-type"
@@ -52,6 +32,12 @@ export const ProfilePage = () => {
                             ></button>
                         ))}
                     </div>
+                    <FormButton
+                        className={styles.saveButton}
+                        onClick={() => console.log('hello')}
+                    >
+                        Сохранить
+                    </FormButton>
                 </div>
             </main>
         </Layout>

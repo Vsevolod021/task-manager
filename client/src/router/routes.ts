@@ -1,7 +1,7 @@
 import {
     REGISTRATION_ROUTE,
     NOTFOUND_ROUTE,
-    PROFILE_ROUTE,
+    WORKSPACE_ROUTE,
     LOGIN_ROUTE,
     DESK_ROUTE,
     USER_ROUTE,
@@ -11,7 +11,7 @@ import {
 import {
     RegistrationPage,
     NotFoundPage,
-    ProfilePage,
+    WorkspacePage,
     LoginPage,
     DesksPage,
     DeskPage,
@@ -20,8 +20,8 @@ import {
 
 export const authRoutes = [
     {
-        path: PROFILE_ROUTE,
-        Component: ProfilePage,
+        path: WORKSPACE_ROUTE,
+        Component: WorkspacePage,
     },
     {
         path: USER_ROUTE + '/:id',

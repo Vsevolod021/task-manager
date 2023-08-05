@@ -38,7 +38,7 @@ class WorkSpaceController {
     }
 
     async getOne(req, res) {
-        const { userId } = req.body;
+        const { userId } = req.params;
 
         let workspace = await Workspace.findOne({
             where: { userId },

@@ -1,19 +1,15 @@
-import React, { ReactNode, useEffect } from 'react';
-
-import {
-    Navigate,
-    Route,
-    Routes,
-    useLocation,
-    useNavigate,
-} from 'react-router-dom';
-
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { NOTFOUND_ROUTE } from '../utils/consts';
+import React, { useEffect } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { authRoutes, publicRoutes } from './routes';
-import { check } from '../http/userAPI';
+import { NOTFOUND_ROUTE } from '../utils/consts';
+
 import { setUserName, setIsAuth, setUserId } from '../store/AuthSlice';
+import { setWorkspace } from '../store/WorkspaceSlice';
+import { useAppDispatch } from '../hooks/redux';
+
+import { getWorkspace } from '../http/workspaceAPI';
+import { check } from '../http/userAPI';
 
 export const AppRouter = () => {
     const dispatch = useAppDispatch();
@@ -23,9 +19,25 @@ export const AppRouter = () => {
     useEffect(() => {
         check()
             .then((data) => {
+                console.log(data);
                 dispatch(setIsAuth(true));
                 dispatch(setUserName(data?.name));
                 dispatch(setUserId(data?.id));
+
+                if (data.id) {
+                    getWorkspace(data.id)
+                        .then((data) => {
+                            console.log(data);
+
+                            dispatch(
+                                setWorkspace({
+                                    theme: data.theme,
+                                    color: data.color,
+                                }),
+                            );
+                        })
+                        .catch((err) => console.log(err));
+                }
             })
             .catch((err) => console.log(err));
     }, []);
