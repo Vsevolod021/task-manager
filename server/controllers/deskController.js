@@ -11,19 +11,21 @@ class DeskController {
             next(ApiError.badRequest(e.message));
         }
     }
-    async getAll(req, res) {
-        let { userId } = req.body;
-        let desks = await Desk.findAll({
-            where: { userId },
-        });
-        return res.json(desks);
-    }
+
     async getOne(req, res) {
         const { id } = req.params;
         const desk = await Desk.findOne({
             where: { id },
         });
         return res.json(desk);
+    }
+
+    async getAll(req, res) {
+        let { userId } = req.query;
+        let desks = await Desk.findAll({
+            where: { userId },
+        });
+        return res.json(desks);
     }
 }
 

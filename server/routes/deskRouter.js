@@ -4,7 +4,7 @@ import deskController from '../controllers/deskController.js';
 
 const router = new Router();
 
-router.post('/', deskController.create);
+router.post('/create', deskController.create);
 router.get('/:id', deskController.getOne);
 router.get('/', deskController.getAll);
 
