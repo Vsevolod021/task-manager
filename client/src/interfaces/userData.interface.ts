@@ -1,4 +1,4 @@
-export default interface userAPIInterface {
+export interface UserAPIInterface {
     id: number;
     email: string;
     name: string;
@@ -6,7 +6,7 @@ export default interface userAPIInterface {
     exp: number;
 }
 
-export default interface workspaceAPIInterface {
+export interface WorkspaceAPIInterface {
     id: number;
     theme: string;
     color: string;

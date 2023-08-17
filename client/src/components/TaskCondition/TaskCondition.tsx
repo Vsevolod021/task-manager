@@ -8,7 +8,7 @@ type TaskConditionProps = {
     className?: string;
     children: ReactNode;
     title: string;
-    id: number;
+    id?: number;
 };
 
 export const TaskCondition: FC<TaskConditionProps> = ({

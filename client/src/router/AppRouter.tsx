@@ -10,6 +10,7 @@ import { useAppDispatch } from '../hooks/redux';
 
 import { getWorkspace } from '../http/workspaceAPI';
 import { check } from '../http/userAPI';
+import { getDesk } from '../http/deskAPI';
 
 export const AppRouter = () => {
     const dispatch = useAppDispatch();
@@ -19,16 +20,15 @@ export const AppRouter = () => {
     useEffect(() => {
         check()
             .then((data) => {
-                console.log(data);
                 dispatch(setIsAuth(true));
                 dispatch(setUserName(data?.name));
                 dispatch(setUserId(data?.id));
 
+                console.log(data);
+
                 if (data.id) {
                     getWorkspace(data.id)
                         .then((data) => {
-                            console.log(data);
-
                             dispatch(
                                 setWorkspace({
                                     theme: data.theme,
@@ -36,11 +36,16 @@ export const AppRouter = () => {
                                 }),
                             );
                         })
-                        .catch((err) => console.log(err));
+                        .catch((err) => console.log('adfvafd ' + err));
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log('qqq ' + err));
     }, []);
+
+    // useEffect(() => {
+    //     getDesk(1).then((data) => console.log(data));
+    //     getAllDesks(1).then((data) => console.log(data));
+    // }, []);
 
     return (
         <Routes>
@@ -55,3 +60,6 @@ export const AppRouter = () => {
         </Routes>
     );
 };
+function getAllDesks(arg0: number) {
+    throw new Error('Function not implemented.');
+}

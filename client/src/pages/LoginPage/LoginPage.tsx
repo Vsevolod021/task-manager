@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import userAPIInterface from '../../interfaces/userData.interface';
 import { login } from '../../http/userAPI';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -11,6 +10,7 @@ import { FormButton, FormInput, LeaveAuth } from '../../components';
 import { Layout } from '../../Layout/Layout';
 import styles from './LoginPage.module.scss';
 import { setWorkspace } from '../../store/WorkspaceSlice';
+import { getWorkspace } from '../../http/workspaceAPI';
 
 export const LoginPage = () => {
     const dispatch = useAppDispatch();
@@ -25,18 +25,20 @@ export const LoginPage = () => {
 
     const authorize = async () => {
         try {
-            const data = await login(email, password);
+            const userData = await login(email, password);
             dispatch(toggleIsAuth(isAuth));
-            dispatch(setUserName(data?.name));
-            dispatch(setUserId(data?.id));
+            dispatch(setUserName(userData?.name));
+            dispatch(setUserId(userData?.id));
 
-            dispatch(
-                setWorkspace({
-                    theme: data.theme,
-                    color: data.color,
-                }),
-            );
-            navigate(`/user/${data.id}`);
+            // const workspaceData = await getWorkspace();
+
+            // dispatch(
+            //     setWorkspace({
+            //         theme: data.theme,
+            //         color: data.color,
+            //     }),
+            // );
+            navigate(`/user/${userData.id}`);
         } catch (e: any) {
             alert(e.response.data.message);
         }

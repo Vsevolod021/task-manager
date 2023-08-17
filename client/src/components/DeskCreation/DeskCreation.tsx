@@ -1,10 +1,11 @@
-import { FC, useContext, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { DeskInfoContext } from '../../contexts/deskInfo.context';
+import { createDesk } from '../../http/deskAPI';
 
 import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleIsOpened } from '../../store/ModalSlice';
 
@@ -13,60 +14,52 @@ type DeskCreationProps = {
 };
 
 export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
-    const colorsStyles = ['red', 'yellow', 'blue', 'pink', 'purple'];
-
-    const { desksInfo, setDesksInfo } = useContext(DeskInfoContext);
-
     const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
+    const userId = useAppSelector((state) => state.Auth.userId);
 
     const dispatch = useAppDispatch();
 
-    const [deskColor, setDeskColor] = useState<string>('default');
-    const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
-    const [isAccessTypeError, setIsAccessTypeError] = useState<boolean>(false);
+    // Стейты значений на инпутах
+    const [deskName, setDeskName] = useState<string>('');
+    const [access, setAccess] = useState<string>('');
 
-    const accessTypeRef = useRef<HTMLSelectElement>(null);
-    const deskNameRef = useRef<HTMLInputElement>(null);
+    // Стейты обработок ошибок
+    const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
+    const [isAccessError, setIsAccessError] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
-    const setDeskParams = () => {
-        if (deskNameRef.current?.value && accessTypeRef.current?.value) {
-            if (setDesksInfo) {
-                setDesksInfo([
-                    ...desksInfo,
-                    {
-                        id: desksInfo.length,
-                        name: deskNameRef.current?.value,
-                        color: deskColor,
-                        access: accessTypeRef.current?.value,
-                    },
-                ]);
+    const createDeskOnClick = async () => {
+        try {
+            if (deskName && access) {
+                const deskData = await createDesk(deskName, access, userId);
+
                 dispatch(toggleIsOpened(isModalOpened));
-                navigate(`/desk/${desksInfo.length}`);
+                navigate(`/desk/${deskData.id}`);
             }
-        } else {
-            if (!deskNameRef.current?.value) {
+            if (!deskName) {
                 setIsDeskNameError(true);
-            } else {
-                setIsDeskNameError(false);
             }
-            if (!accessTypeRef.current?.value) {
-                setIsAccessTypeError(true);
-            } else {
-                setIsAccessTypeError(false);
+            if (!access) {
+                setIsAccessError(true);
             }
+        } catch (e) {
+            console.log(e);
         }
     };
 
     return (
         <div className={cn(styles.wrapper, className)}>
-            <div className={cn(styles.deskInfo, styles[deskColor])}>
+            <div className={cn(styles.deskInfo)}>
                 <div className={styles.inputContainer}>
                     <input
-                        ref={deskNameRef}
                         type="text"
                         placeholder="Desk name"
+                        value={deskName}
+                        onChange={(e) => {
+                            setDeskName(e.target.value);
+                            setIsDeskNameError(false);
+                        }}
                     />
                     {isDeskNameError && (
                         <span className={styles.error}>
@@ -76,15 +69,18 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                 </div>
                 <div className={styles.selectContainer}>
                     <select
-                        ref={accessTypeRef}
                         name="access-type"
                         id="access-type"
+                        onChange={(e) => {
+                            setAccess(e.target.value);
+                            setIsAccessError(false);
+                        }}
                     >
                         <option value="">---</option>
                         <option value="public">публичная</option>
                         <option value="private">приватная</option>
                     </select>
-                    {isAccessTypeError && (
+                    {isAccessError && (
                         <span className={styles.error}>
                             Пожалуйста, укажите тип доступа
                         </span>
@@ -92,9 +88,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                 </div>
             </div>
             <div className={styles.createButton}>
-                <button className={deskColor} onClick={setDeskParams}>
-                    Создать доску
-                </button>
+                <button onClick={createDeskOnClick}>Создать доску</button>
             </div>
         </div>
     );

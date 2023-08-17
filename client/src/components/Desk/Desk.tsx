@@ -1,8 +1,12 @@
-import { useParams, Navigate } from 'react-router-dom';
-import { FC, useContext, useState } from 'react';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { TaskCondition, TaskCard, AppendTaskButton } from '..';
+
+import { getDesk } from '../../http/deskAPI';
+
+import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 
 import community from '../../assets/community.svg';
 import lock from '../../assets/lock.svg';
@@ -11,70 +15,42 @@ import styles from './Desk.module.scss';
 import cn from 'classnames';
 
 type DeskProps = {
+    deskData: DeskAPIInterface;
     className?: string;
 };
 
-export const Desk: FC<DeskProps> = ({ className }) => {
+export const Desk: FC<DeskProps> = ({ deskData, className }) => {
     const { desksInfo, setDesksInfo } = useContext(DeskInfoContext);
-    const { id } = useParams<{ id?: string }>();
 
-    if (!id || !desksInfo.map((elem) => elem.id).includes(+id)) {
-        return <Navigate to={'/notFound'} />;
-    }
-
-    const appendTask = () => {
-        setDesksInfo &&
-            setDesksInfo([
-                ...desksInfo.slice(0, -1),
-                {
-                    id: desksInfo[+id].id,
-                    name: desksInfo[+id].name,
-                    color: desksInfo[+id].color,
-                    access: desksInfo[+id].access,
-                    conditions: {
-                        toDo: [{ name: 'one' }],
-                        inProcess: [],
-                        done: [],
-                    },
-                },
-            ]);
-
-        console.log(desksInfo[+id].conditions?.toDo);
-    };
+    const appendTask = () => {};
 
     return (
         <main className={cn(className, styles.deskContainer)}>
-            {id && (
-                <>
-                    <h1 className={styles.deskName}>{desksInfo[+id]?.name}</h1>
-                    <div className={styles.access}>
-                        <img
-                            src={
-                                desksInfo[+id]?.access === 'public'
-                                    ? community
-                                    : lock
-                            }
-                            alt=""
-                        />
-                        <span>{desksInfo[+id]?.access}</span>
+            <>
+                <h1 className={styles.deskName}>{deskData.name}</h1>
+                <div className={styles.access}>
+                    <img
+                        src={deskData.access === 'public' ? community : lock}
+                        alt=""
+                    />
+                    <span>{deskData.access}</span>
+                </div>
+                {/* <div className={styles.color}>{color}</div> */}
+                <div className={styles.deskFrame}>
+                    <div className={styles.tasksFrame}>
+                        <TaskCondition title="Done">
+                            <AppendTaskButton onClick={appendTask} />
+                            {/* {desksInfo[+id]?.conditions?. && } */}
+                        </TaskCondition>
+                        <TaskCondition title="Done">
+                            <AppendTaskButton />
+                        </TaskCondition>
+                        <TaskCondition title="Done">
+                            <AppendTaskButton />
+                        </TaskCondition>
                     </div>
-                    {/* <div className={styles.color}>{color}</div> */}
-                    <div className={styles.deskFrame}>
-                        <div className={styles.tasksFrame}>
-                            <TaskCondition title="Done" id={+id}>
-                                <AppendTaskButton onClick={appendTask} />
-                                {/* {desksInfo[+id]?.conditions?. && } */}
-                            </TaskCondition>
-                            <TaskCondition title="Done" id={+id}>
-                                <AppendTaskButton />
-                            </TaskCondition>
-                            <TaskCondition title="Done" id={+id}>
-                                <AppendTaskButton />
-                            </TaskCondition>
-                        </div>
-                    </div>
-                </>
-            )}
+                </div>
+            </>
         </main>
     );
 };
