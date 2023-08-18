@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 
 import ApiError from '../error/ApiError.js';
 import { User } from '../models/models.js';
-import models from '../models/models.js';
 
 const generateJwt = (id, email, name) => {
     return jwt.sign({ id, email, name }, process.env.SECRET_KEY, { expiresIn: '24h' });

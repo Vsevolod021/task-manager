@@ -4,9 +4,9 @@ import express from 'express';
 import cors from 'cors';
 
 // импорт внутри проекта
-import ErrorHandlingMiddleware from './middleware/ErrorHandlingMiddleware.js';
-import models from './models/models.js';
-import router from './routes/index.js';
+import ErrorHandlingMiddleware from './src/middleware/ErrorHandlingMiddleware.js';
+import models from './src/models/models.js';
+import router from './src/routes/index.js';
 import sequelize from './db.js';
 
 config();
