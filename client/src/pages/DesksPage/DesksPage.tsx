@@ -1,16 +1,18 @@
-import { useContext, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/redux';
+import { getAllDesks } from '../../http/deskAPI';
+import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 
-import { DeskInfoContext } from '../../contexts/deskInfo.context';
 import { Layout } from '../../Layout/Layout';
-
-import styles from './DesksPage.module.scss';
 import { Append } from '../../components';
 
+import styles from './DesksPage.module.scss';
+
 export const DesksPage = () => {
-    const { desksInfo } = useContext(DeskInfoContext);
+    const [allDesks, setAllDesks] = useState<DeskAPIInterface[]>([]);
+    const [isAllDesksLoading, setIsAllDesksLoading] = useState<boolean>(true);
 
     const userId = useAppSelector((state) => state.Auth.userId);
 
@@ -24,33 +26,48 @@ export const DesksPage = () => {
         }
     }, [userId]);
 
+    useEffect(() => {
+        getAllDesks(userId)
+            .then((data) => {
+                setAllDesks(data);
+            })
+            .catch((err) => console.log(err))
+            .finally(() => setIsAllDesksLoading(false));
+    }, []);
+
     return (
         <Layout>
-            <main className={styles.wrapper}>
-                {desksInfo.length !== 0 ? (
-                    <>
-                        <h1 className={styles.title}>All desks</h1>
-                        <div className={styles.desks}>
-                            {desksInfo.map((d) => (
-                                <div
-                                    className={styles.deskItem}
-                                    key={d.id}
-                                    onClick={() => navigate(`/desk/${d.id}`)}
-                                >
-                                    <div>{d.name}</div>
-                                    <div>{d.color}</div>
-                                    <div>{d.access}</div>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <h1 className={styles.title}>Создайте рабочую доску</h1>
-                        <Append size="big" />
-                    </>
-                )}
-            </main>
+            {isAllDesksLoading ? (
+                <h1>Loading</h1>
+            ) : (
+                <main className={styles.wrapper}>
+                    {allDesks.length !== 0 ? (
+                        <>
+                            <h1 className={styles.title}>All desks</h1>
+                            <div className={styles.desks}>
+                                {allDesks.map((d) => (
+                                    <div
+                                        className={styles.deskItem}
+                                        key={d.id}
+                                        onClick={() =>
+                                            navigate(`/desk/${d.id}`)
+                                        }
+                                    >
+                                        <div>{d.name}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className={styles.title}>
+                                Создайте рабочую доску
+                            </h1>
+                            <Append size="big" />
+                        </>
+                    )}
+                </main>
+            )}
         </Layout>
     );
 };

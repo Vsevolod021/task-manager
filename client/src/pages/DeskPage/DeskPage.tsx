@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Layout } from '../../Layout/Layout';
 import { Desk, Error } from '../../components';
-import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 
 import { getDesk, getAllDesks } from '../../http/deskAPI';
 
@@ -30,8 +29,6 @@ export const DeskPage = () => {
     const { id } = useParams<{ id: string }>();
 
     const userId = useAppSelector((data) => data.Auth.userId);
-
-    const navigate = useNavigate();
 
     const deskId = Number(id);
 

@@ -1,10 +1,6 @@
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { DeskInfoContext } from '../../contexts/deskInfo.context';
-import { TaskCondition, TaskCard, AppendTaskButton } from '..';
-
-import { getDesk } from '../../http/deskAPI';
+import { TaskCondition, AppendTaskButton } from '..';
 
 import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 
@@ -20,8 +16,6 @@ type DeskProps = {
 };
 
 export const Desk: FC<DeskProps> = ({ deskData, className }) => {
-    const { desksInfo, setDesksInfo } = useContext(DeskInfoContext);
-
     const appendTask = () => {};
 
     return (
