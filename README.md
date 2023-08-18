@@ -17,6 +17,7 @@ Frontend-часть реализована с помощью библиотек 
 ## Backend
 Backend написан с помощью библиотеки express. В качестве СУБД выбран PostgreSQL, a само взаимодействие с БД выполняется с помощью ORM Sequelize.   
 Модели БД представлены в файле [models.js](https://github.com/Vsevolod021/task-manager/blob/main/server/src/models/models.js).  
+
 ![Снимок экрана 2023-08-18 220715](https://github.com/Vsevolod021/task-manager/assets/86188778/30df5dea-2624-44e7-b081-105d5cf7262d)
 
 Также приложение поддерживает авторизацию с помощью jwt-токена. 
