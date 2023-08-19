@@ -14,10 +14,24 @@ Frontend-часть реализована с помощью библиотек 
 - [Страница Kanban-доски;](https://github.com/Vsevolod021/task-manager/tree/main/client/src/pages/DeskPage)
 - [Страница "Не найдена";](https://github.com/Vsevolod021/task-manager/tree/main/client/src/pages/NotFoundPage)
 
+### Страницы авторизации и регистрации
+![auth](https://github.com/Vsevolod021/task-manager/assets/86188778/dab93d39-7cd7-43a9-b05b-52187a34909a) 
+
+![reg](https://github.com/Vsevolod021/task-manager/assets/86188778/0d6abfee-b6b9-4e78-bff8-17e1b7ed5379)
+___
+### Страница доски
+___
+На данный момент реалиовано только создание доски и выбор его названия.   
+Сама страница доски уже сверстана и реализована, однако создание задач, их описание и установка времены выполнения задач на данный момент в процессе разработки, хотя и в модели БД все эти опции уже предусмотрены.   
+Ниже находится пример этой страницы в Figma  
+
+![deskPage](https://github.com/Vsevolod021/task-manager/assets/86188778/fc897687-e677-45f2-ad7f-cfb04ec3e949)
+
+
 ## Backend
 Backend написан с помощью библиотеки express. В качестве СУБД выбран PostgreSQL, a само взаимодействие с БД выполняется с помощью ORM Sequelize.   
 Модели БД представлены в файле [models.js](https://github.com/Vsevolod021/task-manager/blob/main/server/src/models/models.js).  
 
-![Снимок экрана 2023-08-18 220715](https://github.com/Vsevolod021/task-manager/assets/86188778/30df5dea-2624-44e7-b081-105d5cf7262d)
+![database](https://github.com/Vsevolod021/task-manager/assets/86188778/30df5dea-2624-44e7-b081-105d5cf7262d)
 
 Также приложение поддерживает авторизацию с помощью jwt-токена. 
