@@ -55,11 +55,12 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     const onCreateDesk = async () => {
         try {
             if (deskName && access && inputConditions.length) {
-                const deskData = await createDesk(deskName, access, userId);
-
-                // inputConditions.forEach((name) => {
-                //     const conditionsData = await createTaskCondition(name, deskData.id);
-                // });
+                const deskData = await createDesk(
+                    deskName,
+                    access,
+                    userId,
+                    inputConditions,
+                );
 
                 dispatch(toggleIsOpened(isModalOpened));
                 navigate(`/desk/${deskData.id}`);
