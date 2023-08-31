@@ -24,16 +24,14 @@ export const DesksPage = () => {
         if (parseInt(path.slice(6)) !== userId) {
             navigate(`/user/${userId}`);
         }
-    }, [userId]);
 
-    useEffect(() => {
         getAllDesks(userId)
             .then((data) => {
                 setAllDesks(data);
             })
             .catch((err) => console.log(err))
             .finally(() => setIsAllDesksLoading(false));
-    }, []);
+    }, [userId]);
 
     return (
         <Layout>

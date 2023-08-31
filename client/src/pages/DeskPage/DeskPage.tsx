@@ -18,7 +18,6 @@ export const DeskPage = () => {
     const [deskData, setDeskData] = useState<DeskAPIInterface>({
         id: 0,
         name: '',
-        access: '',
         createdAt: new Date(0),
         updatedAt: new Date(0),
         userId: 0,

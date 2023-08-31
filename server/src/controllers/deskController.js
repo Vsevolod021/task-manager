@@ -4,8 +4,8 @@ import ApiError from '../error/ApiError.js';
 class DeskController {
     async create(req, res, next) {
         try {
-            const { name, access, userId } = req.body;
-            const desk = await Desk.create({ name, access, userId });
+            const { name, userId } = req.body;
+            const desk = await Desk.create({ name, userId });
             return res.json(desk);
         } catch (e) {
             next(ApiError.badRequest(e.message));

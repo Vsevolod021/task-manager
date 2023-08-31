@@ -18,7 +18,6 @@ const Workspace = sequelize.define('workspace', {
 const Desk = sequelize.define('desk', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
-    access: { type: DataTypes.STRING, allowNull: false, defaultValue: 'public' },
 });
 
 const WorkSprint = sequelize.define('work_sprint', {

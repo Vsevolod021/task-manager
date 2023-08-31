@@ -5,13 +5,11 @@ import { createTaskCondition } from './taskConditionAPI';
 
 export const createDesk = async (
     name: string,
-    access: string,
     userId: number | null,
     taskConditions: string[],
 ): Promise<DeskAPIInterface> => {
     const { data } = await $authHost.post('api/desk/create', {
         name,
-        access,
         userId,
     });
 

@@ -25,7 +25,6 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     // Стейты значений на инпутах
     const [deskName, setDeskName] = useState<string>('');
-    const [access, setAccess] = useState<string>('');
 
     const [inputConditions, setInputConditions] = useState<string[]>([
         'To Do',
@@ -35,7 +34,6 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     // Стейты обработок ошибок
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
-    const [isAccessError, setIsAccessError] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -54,10 +52,9 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     const onCreateDesk = async () => {
         try {
-            if (deskName && access && inputConditions.length) {
+            if (deskName && inputConditions.length) {
                 const deskData = await createDesk(
                     deskName,
-                    access,
                     userId,
                     inputConditions,
                 );
@@ -67,9 +64,6 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
             }
             if (!deskName) {
                 setIsDeskNameError(true);
-            }
-            if (!access) {
-                setIsAccessError(true);
             }
         } catch (e) {
             console.log(e);
@@ -95,25 +89,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                         </span>
                     )}
                 </div>
-                <div className={styles.selectContainer}>
-                    <select
-                        name="access-type"
-                        id="access-type"
-                        onChange={(e) => {
-                            setAccess(e.target.value);
-                            setIsAccessError(false);
-                        }}
-                    >
-                        <option value="">---</option>
-                        <option value="public">публичная</option>
-                        <option value="private">приватная</option>
-                    </select>
-                    {isAccessError && (
-                        <span className={styles.error}>
-                            Пожалуйста, укажите тип доступа
-                        </span>
-                    )}
-                </div>
+
                 <h2>Состояния</h2>
                 <div
                     className={styles.conditionsContainer}
