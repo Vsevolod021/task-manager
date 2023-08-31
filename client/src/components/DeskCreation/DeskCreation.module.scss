@@ -37,6 +37,63 @@
     }
 }
 
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.conditionsContainer {
+    max-height: 250px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar-track {
+        border-left: none;
+    }
+
+    .conditionsInput {
+        margin-top: 10px;
+
+        display: flex;
+        gap: 20px;
+
+        input {
+            height: 40px;
+            width: 350px;
+        }
+
+        button {
+            width: 40px;
+            font-size: 32px;
+            font-weight: 500;
+            padding: 0;
+            border: none;
+            background: transparent;
+
+            &:hover {
+                // font-size: 34px;
+                font-weight: 600;
+                color: var(--gray-dark);
+            }
+        }
+    }
+
+    .addCondition {
+        margin-top: 20px;
+        height: 30px;
+        width: 150px;
+        font-size: 16px;
+
+        background-color: var(--white);
+        border: 1px solid black;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--gray-light);
+        }
+    }
+}
+
 .createButton {
     justify-items: start;
     align-self: flex-start;

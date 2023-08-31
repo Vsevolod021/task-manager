@@ -10,7 +10,7 @@ type FooterProps = {
 export const Footer: FC<FooterProps> = ({ className }) => {
     return (
         <footer className={cn(styles.footer, className)}>
-            <span>© All rights reserved</span>
+            <span>TaskManager © 2023</span>
         </footer>
     );
 };

@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createDesk } from '../../http/deskAPI';
+import { createTaskCondition } from '../../http/taskConditionAPI';
 
 import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
@@ -19,9 +20,18 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     const dispatch = useAppDispatch();
 
+    // ref div для реализации scrollTo
+    const conditionsContainerElem = useRef<HTMLDivElement>(null);
+
     // Стейты значений на инпутах
     const [deskName, setDeskName] = useState<string>('');
     const [access, setAccess] = useState<string>('');
+
+    const [inputConditions, setInputConditions] = useState<string[]>([
+        'To Do',
+        'In Process',
+        'Done',
+    ]);
 
     // Стейты обработок ошибок
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
@@ -29,10 +39,27 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     const navigate = useNavigate();
 
-    const createDeskOnClick = async () => {
+    const onAddCondition = () => {
+        setInputConditions([...inputConditions, '']);
+
+        setTimeout(
+            () =>
+                conditionsContainerElem.current?.scrollTo({
+                    top: conditionsContainerElem.current?.scrollHeight,
+                    behavior: 'smooth',
+                }),
+            50,
+        );
+    };
+
+    const onCreateDesk = async () => {
         try {
-            if (deskName && access) {
+            if (deskName && access && inputConditions.length) {
                 const deskData = await createDesk(deskName, access, userId);
+
+                // inputConditions.forEach((name) => {
+                //     const conditionsData = await createTaskCondition(name, deskData.id);
+                // });
 
                 dispatch(toggleIsOpened(isModalOpened));
                 navigate(`/desk/${deskData.id}`);
@@ -86,9 +113,47 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                         </span>
                     )}
                 </div>
+                <h2>Состояния</h2>
+                <div
+                    className={styles.conditionsContainer}
+                    ref={conditionsContainerElem}
+                >
+                    {inputConditions.map((c, i) => (
+                        <div key={i} className={styles.conditionsInput}>
+                            <input
+                                type="text"
+                                placeholder="состояние..."
+                                value={c}
+                                onChange={(e) => {
+                                    setInputConditions([
+                                        ...inputConditions.slice(0, i),
+                                        e.target.value,
+                                        ...inputConditions.slice(i + 1),
+                                    ]);
+                                }}
+                            />
+                            <button
+                                onClick={() =>
+                                    setInputConditions([
+                                        ...inputConditions.slice(0, i),
+                                        ...inputConditions.slice(i + 1),
+                                    ])
+                                }
+                            >
+                                &times;
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        className={styles.addCondition}
+                        onClick={onAddCondition}
+                    >
+                        Добавить
+                    </button>
+                </div>
             </div>
             <div className={styles.createButton}>
-                <button onClick={createDeskOnClick}>Создать доску</button>
+                <button onClick={onCreateDesk}>Создать доску</button>
             </div>
         </div>
     );

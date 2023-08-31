@@ -24,12 +24,16 @@ class DeskController {
         }
     }
 
-    async getAll(req, res) {
-        let { userId } = req.query;
-        let desks = await Desk.findAll({
-            where: { userId },
-        });
-        return res.json(desks);
+    async getAll(req, res, next) {
+        try {
+            let { userId } = req.query;
+            let desks = await Desk.findAll({
+                where: { userId },
+            });
+            return res.json(desks);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
     }
 }
 
