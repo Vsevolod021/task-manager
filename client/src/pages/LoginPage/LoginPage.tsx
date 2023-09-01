@@ -30,14 +30,6 @@ export const LoginPage = () => {
             dispatch(setUserName(userData?.name));
             dispatch(setUserId(userData?.id));
 
-            // const workspaceData = await getWorkspace();
-
-            // dispatch(
-            //     setWorkspace({
-            //         theme: data.theme,
-            //         color: data.color,
-            //     }),
-            // );
             navigate(`/user/${userData.id}`);
         } catch (e: any) {
             alert(e.response.data.message);

@@ -7,8 +7,6 @@ class TaskConditionController {
         try {
             const { name, deskId } = req.body;
 
-            console.log(name, deskId);
-
             const desk = await Desk.findOne({
                 where: { id: deskId },
             });

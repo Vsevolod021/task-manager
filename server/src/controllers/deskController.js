@@ -15,9 +15,15 @@ class DeskController {
     async getOne(req, res, next) {
         try {
             const { id } = req.params;
+
             const desk = await Desk.findOne({
                 where: { id },
             });
+
+            if (!desk) {
+                return next(ApiError.badRequest('Доски с таким id не существует'));
+            }
+
             return res.json(desk);
         } catch (e) {
             next(ApiError.badRequest(e.message));
