@@ -42,11 +42,6 @@ export const AppRouter = () => {
             .catch((err) => console.log('qqq ' + err));
     }, []);
 
-    // useEffect(() => {
-    //     getDesk(1).then((data) => console.log(data));
-    //     getAllDesks(1).then((data) => console.log(data));
-    // }, []);
-
     return (
         <Routes>
             {isAuth &&
@@ -60,6 +55,3 @@ export const AppRouter = () => {
         </Routes>
     );
 };
-function getAllDesks(arg0: number) {
-    throw new Error('Function not implemented.');
-}

@@ -43,7 +43,7 @@ class WorkSprintController {
 
     async getAll(req, res, next) {
         try {
-            let { deskId } = req.query;
+            const { deskId } = req.query;
 
             if (!deskId) {
                 return next(ApiError.badRequest('Доски с таким id не существует'));

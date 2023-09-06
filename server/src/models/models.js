@@ -38,10 +38,10 @@ const Task = sequelize.define('task', {
 
 const TaskInfo = sequelize.define('task_info', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
-    executor: { type: DataTypes.STRING },
-    priority: { type: DataTypes.STRING },
+    title: { type: DataTypes.STRING, defaultValue: '' },
+    description: { type: DataTypes.STRING, defaultValue: '' },
+    executor: { type: DataTypes.STRING, defaultValue: '' },
+    priority: { type: DataTypes.STRING, defaultValue: 'middle' },
 });
 
 User.hasMany(Desk);

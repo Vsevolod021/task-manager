@@ -26,9 +26,11 @@ class WorkSpaceController {
     }
     async change(req, res) {
         const { theme, color, userId } = req.body;
+
         let workspace = await Workspace.findOne({
             where: { userId },
         });
+
         workspace.update({
             theme: theme,
             color: color,
