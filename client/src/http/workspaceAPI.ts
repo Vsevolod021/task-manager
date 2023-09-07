@@ -30,6 +30,6 @@ export const changeWorkspace = async (
 export const getWorkspace = async (
     userId: number,
 ): Promise<WorkspaceAPIInterface> => {
-    const { data } = await $authHost.get('api/workspace/get/' + userId);
+    const { data } = await $authHost.get('api/workspace/' + userId);
     return data;
 };

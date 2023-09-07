@@ -44,6 +44,6 @@ export interface TaskInfoAPIInterface {
     taskId: number;
 }
 
-export interface TaskFullInfoAPIInterface extends TaskAPIInterface {
+export interface TaskExtendedAPIInterface extends TaskAPIInterface {
     info: TaskAPIInterface;
 }

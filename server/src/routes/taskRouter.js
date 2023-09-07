@@ -7,7 +7,7 @@ const router = new Router();
 router.post('/create', taskController.create);
 router.post('/change-condition', taskController.changeCondition);
 router.post('/change-info', taskController.changeInfo);
-router.get('/get/:id', taskController.getOne);
+router.get('/:id', taskController.getOne);
 router.get('/', taskController.getAll);
 
 export default router;

@@ -128,9 +128,6 @@ class TaskController {
         try {
             const { workSprintId, taskConditionId } = req.query;
 
-            console.log(workSprintId);
-            console.log(taskConditionId);
-
             if (!workSprintId) {
                 return next(ApiError.badRequest('Спринта с таким id не существует'));
             }
