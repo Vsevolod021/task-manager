@@ -2,11 +2,14 @@ import { DeskAPIInterface } from '../interfaces/deskData.interface';
 import { $authHost } from './index';
 
 import { createTaskCondition } from './taskConditionAPI';
+import { createSprint } from './workSprintAPI';
 
 export const createDesk = async (
     name: string,
     userId: number | null,
     taskConditions: string[],
+    startDate: Date,
+    endDate: Date,
 ): Promise<DeskAPIInterface> => {
     const { data } = await $authHost.post('api/desk/create', {
         name,
@@ -14,6 +17,8 @@ export const createDesk = async (
     });
 
     taskConditions.forEach((name) => createTaskCondition(name, data.id));
+
+    createSprint('sprint №1', startDate, endDate, data.id);
 
     return data;
 };

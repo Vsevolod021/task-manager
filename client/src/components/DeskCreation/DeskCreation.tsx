@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { createDesk } from '../../http/deskAPI';
 import { createTaskCondition } from '../../http/taskConditionAPI';
 
+import { getSprintDates } from '../../helpers/helper';
+
 import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
 
@@ -26,11 +28,19 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     // Стейты значений на инпутах
     const [deskName, setDeskName] = useState<string>('');
 
-    const [inputConditions, setInputConditions] = useState<string[]>([
+    const [taskConditions, setTaskConditions] = useState<string[]>([
         'To Do',
         'In Process',
         'Done',
     ]);
+
+    const [startDate, setStartDate] = useState<string>(
+        getSprintDates(new Date()).startDate,
+    );
+
+    const [endDate, setEndDate] = useState<string>(
+        getSprintDates(new Date()).endDate,
+    );
 
     // Стейты обработок ошибок
     const [isDeskNameError, setIsDeskNameError] = useState<boolean>(false);
@@ -38,7 +48,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
     const navigate = useNavigate();
 
     const onAddCondition = () => {
-        setInputConditions([...inputConditions, '']);
+        setTaskConditions([...taskConditions, '']);
 
         setTimeout(
             () =>
@@ -52,11 +62,13 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
 
     const onCreateDesk = async () => {
         try {
-            if (deskName && inputConditions.length) {
+            if (deskName && taskConditions.length) {
                 const deskData = await createDesk(
                     deskName,
                     userId,
-                    inputConditions,
+                    taskConditions,
+                    new Date(startDate),
+                    new Date(endDate),
                 );
 
                 dispatch(toggleIsOpened(isModalOpened));
@@ -95,25 +107,25 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     className={styles.conditionsContainer}
                     ref={conditionsContainerElem}
                 >
-                    {inputConditions.map((c, i) => (
+                    {taskConditions.map((c, i) => (
                         <div key={i} className={styles.conditionsInput}>
                             <input
                                 type="text"
                                 placeholder="состояние..."
                                 value={c}
                                 onChange={(e) => {
-                                    setInputConditions([
-                                        ...inputConditions.slice(0, i),
+                                    setTaskConditions([
+                                        ...taskConditions.slice(0, i),
                                         e.target.value,
-                                        ...inputConditions.slice(i + 1),
+                                        ...taskConditions.slice(i + 1),
                                     ]);
                                 }}
                             />
                             <button
                                 onClick={() =>
-                                    setInputConditions([
-                                        ...inputConditions.slice(0, i),
-                                        ...inputConditions.slice(i + 1),
+                                    setTaskConditions([
+                                        ...taskConditions.slice(0, i),
+                                        ...taskConditions.slice(i + 1),
                                     ])
                                 }
                             >
@@ -127,6 +139,29 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     >
                         Добавить
                     </button>
+                </div>
+                <h2 className={styles.sprintTitle}>Рабочий спринт</h2>
+                <div className={styles.sprintContainer}>
+                    <div className={styles.startDate}>
+                        <p>Дата начала:</p>
+                        <input
+                            type="date"
+                            name="start_date"
+                            id="start_date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                    </div>
+                    <div className={styles.endDate}>
+                        <p>Дата конца:</p>
+                        <input
+                            type="date"
+                            name="end_date"
+                            id="end_date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
+                    </div>
                 </div>
             </div>
             <div className={styles.createButton}>

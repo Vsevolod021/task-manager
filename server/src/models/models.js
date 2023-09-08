@@ -22,7 +22,7 @@ const Desk = sequelize.define('desk', {
 
 const WorkSprint = sequelize.define('work_sprint', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, allowNull: false },
+    name: { type: DataTypes.STRING, defaultValue: 'sprint №1' },
     startDate: { type: DataTypes.DATE },
     endDate: { type: DataTypes.DATE },
 });

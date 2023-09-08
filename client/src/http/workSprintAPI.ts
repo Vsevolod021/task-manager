@@ -17,6 +17,22 @@ export const createSprint = async (
     return data;
 };
 
+export const changeSprint = async (
+    id: number,
+    name: string,
+    startDate: Date,
+    endDate: Date,
+): Promise<WorkSprintAPIInterface> => {
+    const { data } = await $authHost.post('api/sprint/change', {
+        id,
+        name,
+        startDate,
+        endDate,
+    });
+
+    return data;
+};
+
 export const getSprint = async (
     id: number,
 ): Promise<WorkSprintAPIInterface> => {

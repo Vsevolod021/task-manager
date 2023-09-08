@@ -23,6 +23,30 @@ class WorkSprintController {
         }
     }
 
+    async change(req, res, next) {
+        try {
+            const { id, name, startDate, endDate } = req.body;
+
+            const workSprint = await WorkSprint.findOne({
+                where: { id },
+            });
+
+            if (!workSprint) {
+                return next(ApiError.badRequest('Рабочего спринта с таким id не существует'));
+            }
+
+            workSprint.update({
+                name,
+                startDate,
+                endDate,
+            });
+
+            return res.json(workSprint);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
     async getOne(req, res, next) {
         try {
             const { id } = req.params;
