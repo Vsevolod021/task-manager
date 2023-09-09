@@ -32,18 +32,21 @@ export const Desk: FC<DeskProps> = ({ deskData, className }) => {
 
     return (
         <main className={cn(className, styles.deskContainer)}>
-            <>
+            <div className={styles.deskHeader}>
                 <h1 className={styles.deskName}>{deskData.name}</h1>
-                <div className={styles.deskFrame}>
-                    <div className={styles.tasksFrame}>
-                        {taskConditions.map((c) => (
-                            <TaskCondition title={c.name} key={c.id}>
-                                <AppendTaskButton />
-                            </TaskCondition>
-                        ))}
-                    </div>
+            </div>
+            <div className={styles.deskFrame}>
+                <div className={styles.tasksFrame}>
+                    {taskConditions.map((c) => (
+                        <TaskCondition title={c.name} key={c.id}>
+                            <AppendTaskButton />
+                        </TaskCondition>
+                    ))}
+                    <TaskCondition title="title">
+                        <AppendTaskButton />
+                    </TaskCondition>
                 </div>
-            </>
+            </div>
         </main>
     );
 };

@@ -19,7 +19,7 @@ export const AppendTaskButton: FC<AppendTaskButtonProps> = ({
         <button className={cn(className, styles.wrapper)} {...props}>
             <div className={styles.hr} />
             <div className={styles.vr} />
-            <span className={styles.text}>Append Task</span>
+            <span className={styles.text}>Создать</span>
         </button>
     );
 };
