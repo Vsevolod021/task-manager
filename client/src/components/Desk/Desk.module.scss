@@ -1,24 +1,38 @@
 .deskContainer {
 }
 
-.deskName {
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 74px;
-    color: var(--black);
-    margin: 0;
-}
-
-.access {
-    margin-top: 5px;
-    color: var(--gray);
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 37px;
-    display: flex;
+.deskHeader {
+    padding: 0 70px 0 60px;
+    display: grid;
+    grid-template-columns: auto 200px 100px;
+    gap: 40px;
     align-items: center;
-}
 
+    h1 {
+        font-weight: 700;
+        font-size: 54px;
+        line-height: 74px;
+        color: var(--black);
+        margin: 0;
+    }
+
+    select,
+    button {
+        height: 45px;
+        font-size: 22px;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            transition: 0.4s ease-in-out;
+            color: var(--gray-light);
+        }
+    }
+}
 .deskFrame {
     width: calc(100vw - 7px);
     overflow-x: scroll;
@@ -28,7 +42,7 @@
     display: grid;
     grid-auto-flow: column;
     gap: 50px;
-    padding: 40px;
+    padding: 20px 40px;
     justify-self: flex-start;
     justify-content: start;
 }

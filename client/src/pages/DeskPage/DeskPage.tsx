@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import { Layout } from '../../Layout/Layout';
 import { Desk, Error } from '../../components';
 
 import { getDesk, getAllDesks } from '../../http/deskAPI';
+import { getAllSprints } from '../../http/workSprintAPI';
 
 import { useAppSelector } from '../../hooks/redux';
 import { DeskAPIInterface } from '../../interfaces/deskData.interface';
@@ -25,11 +26,13 @@ export const DeskPage = () => {
 
     const [userDesksIds, setUserDesksIds] = useState<number[]>([]);
 
-    const { id } = useParams<{ id: string }>();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // const { id } = useParams<{ id: string }>();
 
     const userId = useAppSelector((data) => data.Auth.userId);
 
-    const deskId = Number(id);
+    const deskId = Number(searchParams.get('deskId'));
 
     useEffect(() => {
         if (userId) {
@@ -50,6 +53,15 @@ export const DeskPage = () => {
                 })
                 .catch((err) => console.log(err))
                 .finally(() => setIsDeskLoading(false));
+
+            getAllSprints(deskId)
+                .then((data) => {
+                    setSearchParams({
+                        deskId: `${deskId}`,
+                        sprintId: `${data.at(-1)?.id}`,
+                    });
+                })
+                .catch((err) => console.log(err));
         }
     }, [userId]);
 

@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/redux';
 import { getAllDesks } from '../../http/deskAPI';
+import { getAllSprints } from '../../http/workSprintAPI';
+
 import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 
 import { Layout } from '../../Layout/Layout';
@@ -48,7 +50,7 @@ export const DesksPage = () => {
                                         className={styles.deskItem}
                                         key={d.id}
                                         onClick={() =>
-                                            navigate(`/desk/${d.id}`)
+                                            navigate(`/desk?deskId=${d.id}`)
                                         }
                                     >
                                         <div>{d.name}</div>

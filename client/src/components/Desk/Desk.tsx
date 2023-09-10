@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import { TaskCondition, AppendTaskButton } from '..';
+import { TaskCondition, AppendTaskButton, TaskCard } from '..';
 
 import {
     DeskAPIInterface,
@@ -34,17 +34,19 @@ export const Desk: FC<DeskProps> = ({ deskData, className }) => {
         <main className={cn(className, styles.deskContainer)}>
             <div className={styles.deskHeader}>
                 <h1 className={styles.deskName}>{deskData.name}</h1>
+                <select name="" id="">
+                    <option value="1">sprint 1</option>
+                    <option value="2">sprint 2</option>
+                    <option value="3">sprint 3</option>
+                    <option value="4">sprint 4</option>
+                </select>
+                <button>⬤ ⬤ ⬤</button>
             </div>
             <div className={styles.deskFrame}>
                 <div className={styles.tasksFrame}>
                     {taskConditions.map((c) => (
-                        <TaskCondition title={c.name} key={c.id}>
-                            <AppendTaskButton />
-                        </TaskCondition>
+                        <TaskCondition conditionInfo={c} key={c.id} />
                     ))}
-                    <TaskCondition title="title">
-                        <AppendTaskButton />
-                    </TaskCondition>
                 </div>
             </div>
         </main>

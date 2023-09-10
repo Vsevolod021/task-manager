@@ -72,7 +72,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                 );
 
                 dispatch(toggleIsOpened(isModalOpened));
-                navigate(`/desk/${deskData.id}`);
+                navigate(`/desk?deskId=${deskData.id}`);
             }
             if (!deskName) {
                 setIsDeskNameError(true);

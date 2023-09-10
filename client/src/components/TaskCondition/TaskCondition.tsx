@@ -1,28 +1,40 @@
-import { FC, ReactNode } from 'react';
+import { FC, useEffect } from 'react';
+
+import { AppendTaskButton, TaskCard } from '..';
+
+import { useAppSelector } from '../../hooks/redux';
+
+import { TaskConditionAPIInterface } from '../../interfaces/deskData.interface';
+import { fetchAllTasks } from '../../http/taskAPI';
 
 import styles from './TaskCondition.module.scss';
 import cn from 'classnames';
-import { useAppSelector } from '../../hooks/redux';
 
 type TaskConditionProps = {
     className?: string;
-    children: ReactNode;
-    title: string;
-    id?: number;
+    conditionInfo: TaskConditionAPIInterface;
 };
 
 export const TaskCondition: FC<TaskConditionProps> = ({
     className,
-    children,
-    title,
-    id,
+    conditionInfo,
 }) => {
     const deskColor = useAppSelector((state) => state.Workspace.color);
 
+    // useEffect(() => {
+    //     fetchAllTasks();
+    // }, []);
+
     return (
         <div className={cn(styles.taskCondition, styles[deskColor], className)}>
-            <h1 className={styles.conditionTitle}>{title}</h1>
-            <div className={styles.conditionCards}>{children}</div>
+            <h1 className={styles.conditionTitle}>{conditionInfo.name}</h1>
+            <div className={styles.conditionCards}>
+                <AppendTaskButton />
+                <TaskCard />
+                <TaskCard />
+                <TaskCard />
+                <TaskCard />
+            </div>
         </div>
     );
 };

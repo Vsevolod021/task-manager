@@ -28,7 +28,7 @@ export const authRoutes = [
         Component: DesksPage,
     },
     {
-        path: DESK_ROUTE + '/:id',
+        path: DESK_ROUTE,
         Component: DeskPage,
     },
 ];
