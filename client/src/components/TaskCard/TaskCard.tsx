@@ -6,7 +6,6 @@ import cn from 'classnames';
 
 type TaskCardProps = {
     className?: string;
-    onDragStart?: Event;
 };
 
 export const TaskCard: FC<TaskCardProps> = ({ className }) => {

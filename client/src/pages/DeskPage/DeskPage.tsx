@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { Layout } from '../../Layout/Layout';
 import { Desk, Error } from '../../components';
@@ -8,14 +8,20 @@ import { getDesk, getAllDesks } from '../../http/deskAPI';
 import { getAllSprints } from '../../http/workSprintAPI';
 
 import { useAppSelector } from '../../hooks/redux';
-import { DeskAPIInterface } from '../../interfaces/deskData.interface';
+import {
+    DeskAPIInterface,
+    WorkSprintAPIInterface,
+} from '../../interfaces/deskData.interface';
 
 import styles from './DeskPage.module.scss';
 
 export const DeskPage = () => {
+    // Стейты подгрузки данных
     const [isDeskLoading, setIsDeskLoading] = useState<boolean>(true);
     const [isAllDesksLoading, setIsAllDesksLoading] = useState<boolean>(true);
+    const [isSprintsLoading, setIsSprintsLoading] = useState<boolean>(true);
 
+    // Стейты данных с сервера
     const [deskData, setDeskData] = useState<DeskAPIInterface>({
         id: 0,
         name: '',
@@ -24,11 +30,14 @@ export const DeskPage = () => {
         userId: 0,
     });
 
+    const [sprintsData, setSprintsData] = useState<WorkSprintAPIInterface[]>(
+        [],
+    );
+
+    // стейт для проверки Введенного deksId
     const [userDesksIds, setUserDesksIds] = useState<number[]>([]);
 
     const [searchParams, setSearchParams] = useSearchParams();
-
-    // const { id } = useParams<{ id: string }>();
 
     const userId = useAppSelector((data) => data.Auth.userId);
 
@@ -56,21 +65,25 @@ export const DeskPage = () => {
 
             getAllSprints(deskId)
                 .then((data) => {
-                    setSearchParams({
-                        deskId: `${deskId}`,
-                        sprintId: `${data.at(-1)?.id}`,
-                    });
+                    if (!searchParams.get('sprintId')) {
+                        setSearchParams({
+                            deskId: `${deskId}`,
+                            sprintId: `${data.at(-1)?.id}`,
+                        });
+                    }
+                    setSprintsData(data);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => console.log(err))
+                .finally(() => setIsSprintsLoading(false));
         }
     }, [userId]);
 
     return (
         <Layout>
-            {isDeskLoading || isAllDesksLoading ? (
+            {isDeskLoading || isAllDesksLoading || isSprintsLoading ? (
                 <h1>Loading</h1>
             ) : userDesksIds.includes(deskId) ? (
-                <Desk deskData={deskData} />
+                <Desk deskData={deskData} sprintsData={sprintsData} />
             ) : (
                 <Error errorText="Неправильный id доски" />
             )}

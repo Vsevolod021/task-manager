@@ -4,7 +4,10 @@ import { AppendTaskButton, TaskCard } from '..';
 
 import { useAppSelector } from '../../hooks/redux';
 
-import { TaskConditionAPIInterface } from '../../interfaces/deskData.interface';
+import {
+    TaskConditionAPIInterface,
+    WorkSprintAPIInterface,
+} from '../../interfaces/deskData.interface';
 import { fetchAllTasks } from '../../http/taskAPI';
 
 import styles from './TaskCondition.module.scss';
@@ -12,12 +15,14 @@ import cn from 'classnames';
 
 type TaskConditionProps = {
     className?: string;
-    conditionInfo: TaskConditionAPIInterface;
+    conditionData: TaskConditionAPIInterface;
+    sprintData: WorkSprintAPIInterface;
 };
 
 export const TaskCondition: FC<TaskConditionProps> = ({
     className,
-    conditionInfo,
+    conditionData,
+    sprintData,
 }) => {
     const deskColor = useAppSelector((state) => state.Workspace.color);
 
@@ -27,13 +32,13 @@ export const TaskCondition: FC<TaskConditionProps> = ({
 
     return (
         <div className={cn(styles.taskCondition, styles[deskColor], className)}>
-            <h1 className={styles.conditionTitle}>{conditionInfo.name}</h1>
+            <h1 className={styles.conditionTitle}>{conditionData.name}</h1>
             <div className={styles.conditionCards}>
+                <TaskCard />
+                <TaskCard />
+                <TaskCard />
+                <TaskCard />
                 <AppendTaskButton />
-                <TaskCard />
-                <TaskCard />
-                <TaskCard />
-                <TaskCard />
             </div>
         </div>
     );
