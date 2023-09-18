@@ -1,7 +1,13 @@
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Append, MenuButton, Arrow } from '../../components';
+import {
+    AppendDesk,
+    MenuButton,
+    Arrow,
+    Modal,
+    DeskCreation,
+} from '../../components';
 
 import avatar from '../../assets/avatar.png';
 
@@ -20,42 +26,44 @@ export const Header: FC<HeaderProps> = ({ className }) => {
     const navigate = useNavigate();
 
     return (
-        <header className={cn(styles.header, className)}>
-            <div className={styles.headerContent}>
-                <Link
-                    to={isAuth ? `/user/${userId}` : '/'}
-                    className={styles.logo}
-                >
-                    <p>
-                        TASK
-                        <br />
-                        MANAGER
-                    </p>
-                </Link>
-                <MenuButton />
-
-                {isAuth ? (
-                    <>
-                        <Append />
-                        <div className={styles.avatar}>
-                            <img
-                                src={avatar}
-                                alt="user"
-                                width="50px"
-                                height="50px"
-                            />
-                        </div>
-                        <Arrow className={styles.arrow} />
-                    </>
-                ) : (
-                    <button
-                        className={styles.signUp}
-                        onClick={() => navigate('/login')}
+        <>
+            <header className={cn(styles.header, className)}>
+                <div className={styles.headerContent}>
+                    <Link
+                        to={isAuth ? `/user/${userId}` : '/'}
+                        className={styles.logo}
                     >
-                        Войти
-                    </button>
-                )}
-            </div>
-        </header>
+                        <p>
+                            TASK
+                            <br />
+                            MANAGER
+                        </p>
+                    </Link>
+                    <MenuButton />
+
+                    {isAuth ? (
+                        <>
+                            <AppendDesk />
+                            <div className={styles.avatar}>
+                                <img
+                                    src={avatar}
+                                    alt="user"
+                                    width="50px"
+                                    height="50px"
+                                />
+                            </div>
+                            <Arrow className={styles.arrow} />
+                        </>
+                    ) : (
+                        <button
+                            className={styles.signUp}
+                            onClick={() => navigate('/login')}
+                        >
+                            Войти
+                        </button>
+                    )}
+                </div>
+            </header>
+        </>
     );
 };

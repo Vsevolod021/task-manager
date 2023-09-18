@@ -1,13 +1,14 @@
 .wrapper {
     display: flex;
-    width: 550px;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 30px;
 }
 
 .deskInfo {
     padding: 25px;
+    width: 550px;
     background-color: var(--gray-light);
 }
 

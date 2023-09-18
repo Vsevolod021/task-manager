@@ -2,25 +2,20 @@ import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createDesk } from '../../http/deskAPI';
-import { createTaskCondition } from '../../http/taskConditionAPI';
 
 import { getSprintDates } from '../../helpers/helper';
 
 import styles from './DeskCreation.module.scss';
 import cn from 'classnames';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsOpened } from '../../store/ModalSlice';
+import { useAppSelector } from '../../hooks/redux';
 
 type DeskCreationProps = {
     className?: string;
 };
 
 export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
-    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
     const userId = useAppSelector((state) => state.Auth.userId);
-
-    const dispatch = useAppDispatch();
 
     // ref div для реализации scrollTo
     const conditionsContainerElem = useRef<HTMLDivElement>(null);
@@ -71,7 +66,6 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                     new Date(endDate),
                 );
 
-                dispatch(toggleIsOpened(isModalOpened));
                 navigate(`/desk?deskId=${deskData.id}`);
             }
             if (!deskName) {

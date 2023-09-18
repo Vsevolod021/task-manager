@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { TaskCondition } from '..';
+import { TaskCondition, DropDownList, Modal } from '..';
 
 import {
     WorkSprintAPIInterface,
@@ -36,7 +36,18 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
         deskId: 0,
     });
 
+    const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+
+    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const navigate = useNavigate();
+
+    const menuOptions = [
+        { name: 'Настройки доски', onClick: () => navigate('/workspace') },
+        { name: 'Создать спринт', onClick: () => setIsModalOpened(true) },
+    ];
 
     useEffect(() => {
         getTaskConditions(deskData.id)
@@ -45,7 +56,6 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
 
         getSprint(Number(searchParams.get('sprintId')))
             .then((data) => {
-                console.log('data changed');
                 setSprintData(data);
             })
             .catch((err) => console.log(err));
@@ -77,7 +87,19 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                         </option>
                     ))}
                 </select>
-                <button>⬤ ⬤ ⬤</button>
+                <button
+                    className={styles.menuButton}
+                    onClick={(prev) => setIsMenuOpened((prev) => !prev)}
+                >
+                    ⬤ ⬤ ⬤
+                </button>
+                {isMenuOpened && (
+                    <DropDownList
+                        outline="black"
+                        options={menuOptions}
+                        className={styles.deskMenu}
+                    />
+                )}
             </div>
             <div className={styles.deskFrame}>
                 <div className={styles.tasksFrame}>
@@ -90,6 +112,9 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                     ))}
                 </div>
             </div>
+            {isModalOpened && (
+                <Modal onClose={() => setIsModalOpened(false)}>f</Modal>
+            )}
         </main>
     );
 };

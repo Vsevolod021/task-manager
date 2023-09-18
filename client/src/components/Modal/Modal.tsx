@@ -3,18 +3,13 @@ import { FC, ReactNode } from 'react';
 import closeIcon from '../../assets/close.svg';
 
 import styles from './Modal.module.scss';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsOpened } from '../../store/ModalSlice';
 
 type ModalProps = {
+    onClose?: () => void;
     children: ReactNode;
 };
 
-export const Modal: FC<ModalProps> = ({ children }) => {
-    const isModalOpened = useAppSelector((state) => state.Modal.isOpened);
-
-    const dispatch = useAppDispatch();
-
+export const Modal: FC<ModalProps> = ({ children, onClose }) => {
     return (
         <div className={styles.modal}>
             {children}
@@ -22,7 +17,7 @@ export const Modal: FC<ModalProps> = ({ children }) => {
                 src={closeIcon}
                 alt="close"
                 className={styles.deskClose}
-                onClick={() => dispatch(toggleIsOpened(isModalOpened))}
+                onClick={onClose}
             />
         </div>
     );

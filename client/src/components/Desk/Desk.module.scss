@@ -7,6 +7,8 @@
     grid-template-columns: auto 200px 100px;
     gap: 40px;
     align-items: center;
+    position: relative;
+    z-index: 1;
 
     h1 {
         font-weight: 700;
@@ -22,7 +24,7 @@
         font-size: 22px;
     }
 
-    button {
+    .menuButton {
         background: none;
         border: none;
         cursor: pointer;
@@ -33,6 +35,14 @@
         }
     }
 }
+
+.deskMenu {
+    position: absolute;
+    z-index: 2;
+    top: 70px;
+    right: 70px;
+}
+
 .deskFrame {
     width: calc(100vw - 7px);
     overflow-x: scroll;

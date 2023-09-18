@@ -41,8 +41,6 @@ export const TaskCondition: FC<TaskConditionProps> = ({
             .catch((err) => console.log(err));
     }, [sprintData, appendTask]);
 
-    useEffect(() => console.log(taskTitle), [taskTitle]);
-
     const onCreateTask = async () => {
         const taskData = await createTask(
             taskTitle,
