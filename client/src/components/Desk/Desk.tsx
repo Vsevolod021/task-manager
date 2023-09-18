@@ -44,11 +44,12 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
             .catch((err) => console.log(err));
 
         getSprint(Number(searchParams.get('sprintId')))
-            .then((data) => setSprintData(data))
+            .then((data) => {
+                console.log('data changed');
+                setSprintData(data);
+            })
             .catch((err) => console.log(err));
-    }, []);
-
-    const appendTask = () => {};
+    }, [searchParams]);
 
     return (
         <main className={cn(className, styles.deskContainer)}>

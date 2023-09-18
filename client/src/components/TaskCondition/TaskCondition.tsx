@@ -1,14 +1,15 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import { AppendTaskButton, TaskCard } from '..';
+import { AppendTaskButton, AppendTaskForm, TaskCard } from '..';
 
 import { useAppSelector } from '../../hooks/redux';
 
 import {
     TaskConditionAPIInterface,
     WorkSprintAPIInterface,
+    TaskExtendedAPIInterface,
 } from '../../interfaces/deskData.interface';
-import { fetchAllTasks } from '../../http/taskAPI';
+import { fetchAllTasks, createTask } from '../../http/taskAPI';
 
 import styles from './TaskCondition.module.scss';
 import cn from 'classnames';
@@ -24,21 +25,36 @@ export const TaskCondition: FC<TaskConditionProps> = ({
     conditionData,
     sprintData,
 }) => {
+    const [tasks, setTasks] = useState<TaskExtendedAPIInterface[]>([]);
+
+    const [appendTask, setAppendTask] = useState<'button' | 'form'>('button');
+
     const deskColor = useAppSelector((state) => state.Workspace.color);
 
-    // useEffect(() => {
-    //     fetchAllTasks();
-    // }, []);
+    useEffect(() => {
+        fetchAllTasks(sprintData.id, conditionData.id)
+            .then((data) => {
+                setTasks(data);
+            })
+            .catch((err) => console.log(err));
+    }, [sprintData]);
+
+    // const onCreateTask = async () => {
+    //     const taskData = await createTask()
+    // };
 
     return (
         <div className={cn(styles.taskCondition, styles[deskColor], className)}>
             <h1 className={styles.conditionTitle}>{conditionData.name}</h1>
             <div className={styles.conditionCards}>
-                <TaskCard />
-                <TaskCard />
-                <TaskCard />
-                <TaskCard />
-                <AppendTaskButton />
+                {tasks.map((t) => (
+                    <TaskCard taskData={t} key={t.id} />
+                ))}
+                {appendTask === 'button' ? (
+                    <AppendTaskButton onClick={() => setAppendTask('form')} />
+                ) : (
+                    <AppendTaskForm onClose={() => setAppendTask('button')} />
+                )}
             </div>
         </div>
     );

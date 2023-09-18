@@ -1,0 +1,70 @@
+.wrapper {
+    width: 100%;
+    height: 90px;
+    margin: 10px 0;
+    padding: 5px 10px;
+    border: 1px solid black;
+
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 10px 20px;
+
+    button {
+        cursor: pointer;
+    }
+
+    .input {
+        grid-column: 1/3;
+        resize: none;
+        font-size: 18px;
+
+        &:hover {
+            outline: 1px solid var(--gray);
+        }
+    }
+
+    .createBtn {
+        background: none;
+        border: 1px solid black;
+        font-size: 18px;
+
+        &:hover {
+            background: var(--gray-light);
+        }
+    }
+
+    .closeBtn {
+        border: none;
+        background: none;
+        font-size: 18px;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+}
+
+.default {
+    border: 1px solid var(--black);
+}
+
+.red {
+    border: 12px solid rgb(246, 98, 98);
+}
+
+.yellow {
+    border: 1px solid rgb(255, 190, 69);
+}
+
+.blue {
+    border: 1px solid rgb(82, 82, 255);
+}
+
+.pink {
+    border: 1px solid rgb(253, 170, 184);
+}
+
+.purple {
+    border: 1px solid rgb(255, 117, 255);
+}
