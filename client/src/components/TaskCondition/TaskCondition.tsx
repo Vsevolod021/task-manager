@@ -29,6 +29,8 @@ export const TaskCondition: FC<TaskConditionProps> = ({
 
     const [appendTask, setAppendTask] = useState<'button' | 'form'>('button');
 
+    const [taskTitle, setTaskTitle] = useState<string>('');
+
     const deskColor = useAppSelector((state) => state.Workspace.color);
 
     useEffect(() => {
@@ -37,11 +39,20 @@ export const TaskCondition: FC<TaskConditionProps> = ({
                 setTasks(data);
             })
             .catch((err) => console.log(err));
-    }, [sprintData]);
+    }, [sprintData, appendTask]);
 
-    // const onCreateTask = async () => {
-    //     const taskData = await createTask()
-    // };
+    useEffect(() => console.log(taskTitle), [taskTitle]);
+
+    const onCreateTask = async () => {
+        const taskData = await createTask(
+            taskTitle,
+            sprintData.id,
+            conditionData.id,
+        ).then(() => {
+            setTaskTitle('');
+            setAppendTask('button');
+        });
+    };
 
     return (
         <div className={cn(styles.taskCondition, styles[deskColor], className)}>
@@ -53,7 +64,16 @@ export const TaskCondition: FC<TaskConditionProps> = ({
                 {appendTask === 'button' ? (
                     <AppendTaskButton onClick={() => setAppendTask('form')} />
                 ) : (
-                    <AppendTaskForm onClose={() => setAppendTask('button')} />
+                    <AppendTaskForm
+                        onCreate={
+                            taskTitle !== ''
+                                ? onCreateTask
+                                : () => alert('Введите название задачи')
+                        }
+                        onClose={() => setAppendTask('button')}
+                        setTaskTitle={setTaskTitle}
+                        taskTitle={taskTitle}
+                    />
                 )}
             </div>
         </div>
