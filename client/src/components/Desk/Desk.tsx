@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { TaskCondition, DropDownList, Modal } from '..';
+import { TaskCondition, DropDownList, Modal, SprintCreation } from '..';
 
 import {
     WorkSprintAPIInterface,
@@ -45,8 +45,14 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
     const navigate = useNavigate();
 
     const menuOptions = [
-        { name: 'Настройки доски', onClick: () => navigate('/workspace') },
-        { name: 'Создать спринт', onClick: () => setIsModalOpened(true) },
+        { name: 'Настройки доски', onClick: () => navigate('') },
+        {
+            name: 'Создать спринт',
+            onClick: () => {
+                setIsModalOpened(true);
+                setIsMenuOpened(false);
+            },
+        },
     ];
 
     useEffect(() => {
@@ -113,7 +119,12 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                 </div>
             </div>
             {isModalOpened && (
-                <Modal onClose={() => setIsModalOpened(false)}>f</Modal>
+                <Modal onClose={() => setIsModalOpened(false)}>
+                    <SprintCreation
+                        deskId={deskData.id}
+                        onCreate={() => setIsModalOpened(false)}
+                    />
+                </Modal>
             )}
         </main>
     );

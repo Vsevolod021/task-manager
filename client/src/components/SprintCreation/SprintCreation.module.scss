@@ -1,0 +1,81 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.sprintInfo {
+    justify-self: center;
+    padding: 25px;
+    width: 500px;
+    background-color: var(--gray-light);
+
+    .nameInput {
+        position: relative;
+        z-index: 2;
+        height: 50px;
+        padding-top: 15px;
+
+        input {
+            width: 400px;
+            height: 40px;
+            font-size: 20px;
+        }
+    }
+
+    .datesContainer {
+        width: 400px;
+        margin-top: 20px;
+
+        .startDate,
+        .endDate {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            p {
+                font-size: 17px;
+            }
+
+            input {
+                height: 35px;
+                width: 200px;
+            }
+        }
+    }
+}
+
+.createButton {
+    justify-items: start;
+    align-self: flex-start;
+
+    button {
+        height: 40px;
+        width: 180px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.error {
+    color: red;
+    display: block;
+    z-index: 1;
+    animation-name: error-appearance;
+    animation-duration: 0.5s;
+    position: relative;
+}
+
+@keyframes error-appearance {
+    0% {
+        top: -15px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}

@@ -34,24 +34,29 @@ export const DeskPage = () => {
         [],
     );
 
-    // стейт для проверки Введенного deksId
+    // стейт для проверки Введенного deksId и sprintId
     const [userDesksIds, setUserDesksIds] = useState<number[]>([]);
+    const [deskSprintsIds, setDeskSprintsIds] = useState<number[]>([]);
 
+    // Search params
     const [searchParams, setSearchParams] = useSearchParams();
 
+    // Id пользователя, доски и спринта
     const userId = useAppSelector((data) => data.Auth.userId);
 
     const deskId = Number(searchParams.get('deskId'));
+
+    const sprintId = Number(searchParams.get('sprintId'));
 
     useEffect(() => {
         if (userId) {
             getAllDesks(userId)
                 .then((data) => {
-                    let copy: number[] = [];
+                    let deskIdsCopy: number[] = [];
                     data.forEach((d) => {
-                        copy.push(d.id);
+                        deskIdsCopy.push(d.id);
                     });
-                    setUserDesksIds(copy);
+                    setUserDesksIds(deskIdsCopy);
                 })
                 .catch((err) => console.log(err))
                 .finally(() => setIsAllDesksLoading(false));
@@ -70,22 +75,29 @@ export const DeskPage = () => {
                             deskId: `${deskId}`,
                             sprintId: `${data.at(-1)?.id}`,
                         });
+                    } else {
+                        let sprintsIdsCopy: number[] = [];
+                        data.forEach((d) => {
+                            sprintsIdsCopy.push(d.id);
+                        });
+                        setDeskSprintsIds(sprintsIdsCopy);
                     }
                     setSprintsData(data);
                 })
                 .catch((err) => console.log(err))
                 .finally(() => setIsSprintsLoading(false));
         }
-    }, [userId]);
+    }, [userId, deskId, searchParams]);
 
     return (
         <Layout>
             {isDeskLoading || isAllDesksLoading || isSprintsLoading ? (
                 <h1>Loading</h1>
-            ) : userDesksIds.includes(deskId) ? (
+            ) : userDesksIds.includes(deskId) &&
+              deskSprintsIds.includes(sprintId) ? (
                 <Desk deskData={deskData} sprintsData={sprintsData} />
             ) : (
-                <Error errorText="Неправильный id доски" />
+                <Error errorText="Неверно введенные Id" />
             )}
         </Layout>
     );

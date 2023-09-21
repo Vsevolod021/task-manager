@@ -82,7 +82,7 @@ export const DeskCreation: FC<DeskCreationProps> = ({ className }) => {
                 <div className={styles.inputContainer}>
                     <input
                         type="text"
-                        placeholder="Desk name"
+                        placeholder="Название доски"
                         value={deskName}
                         onChange={(e) => {
                             setDeskName(e.target.value);

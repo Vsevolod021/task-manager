@@ -1,5 +1,6 @@
 export * from './AppendTaskButton/AppendTaskButton';
 export * from './AppendTaskForm/AppendTaskForm';
+export * from './SprintCreation/SprintCreation';
 export * from './TaskCondition/TaskCondition';
 export * from './DeskCreation/DeskCreation';
 export * from './DropDownList/DropDownList';
