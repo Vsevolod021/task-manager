@@ -57,7 +57,7 @@ export const TaskCondition: FC<TaskConditionProps> = ({
             <h1 className={styles.conditionTitle}>{conditionData.name}</h1>
             <div className={styles.conditionCards}>
                 {tasks.map((t) => (
-                    <TaskCard taskData={t} key={t.id} />
+                    <TaskCard taskId={t.id} key={t.id} />
                 ))}
                 {appendTask === 'button' ? (
                     <AppendTaskButton onClick={() => setAppendTask('form')} />

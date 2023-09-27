@@ -39,7 +39,7 @@ export const changeTaskInfo = async (
     priority: string,
     taskId: number,
 ): Promise<TaskInfoAPIInterface> => {
-    const { data } = await $authHost.post('api/task/change-condition', {
+    const { data } = await $authHost.post('api/task/change-info', {
         title,
         description,
         executor,

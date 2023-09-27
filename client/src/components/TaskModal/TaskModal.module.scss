@@ -1,0 +1,84 @@
+.wrapper {
+    width: 800px;
+    height: 350px;
+    background: white;
+
+    padding: 10px 20px;
+
+    display: grid;
+
+    grid-template-columns: 3.5fr 1fr 1fr;
+    grid-template-rows: 70px repeat(3, 40px);
+    gap: 10px 20px;
+}
+
+.title {
+    grid-column: 1/2;
+    grid-row: 1/2;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    position: relative;
+
+    .titleH1 {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+
+        cursor: pointer;
+
+        h1 {
+            cursor: text;
+        }
+
+        button {
+            cursor: pointer;
+
+            background: none;
+            border: none;
+        }
+    }
+
+    .titleInput {
+        width: 100%;
+        height: 60%;
+    }
+
+    .titleInputClose {
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+
+        cursor: pointer;
+
+        position: absolute;
+        right: 0;
+
+        background: none;
+        border: none;
+    }
+}
+
+.description {
+    grid-column: 1/2;
+    grid-row: 2/5;
+}
+
+.executorsTitle {
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.statusTitle {
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+
+.priorityTitle {
+    grid-row: 4/5;
+    grid-column: 2/3;
+}
