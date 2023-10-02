@@ -97,6 +97,8 @@ class TaskController {
                 priority: priority,
             });
 
+            console.log(priority);
+
             return res.json(taskInfo);
         } catch (e) {
             next(ApiError.badRequest(e.message));

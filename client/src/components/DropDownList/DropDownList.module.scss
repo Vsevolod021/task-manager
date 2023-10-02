@@ -1,7 +1,3 @@
-.wrapper {
-    min-width: 240px;
-}
-
 .primary {
     border: 1px solid var(--primary);
 }
@@ -21,7 +17,32 @@
 
     font-size: 20px;
 
+    display: flex;
+    align-items: center;
+
     &:hover {
         background: var(--gray-light);
     }
+}
+
+.small {
+    min-width: 140px;
+
+    .option {
+        height: 25px;
+
+        font-size: 14px;
+    }
+}
+
+.mid {
+    min-width: 200px;
+}
+
+.big {
+    min-width: 240px;
+}
+
+.pushed {
+    background: var(--gray-light);
 }
