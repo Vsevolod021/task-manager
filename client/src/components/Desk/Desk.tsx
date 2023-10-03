@@ -6,7 +6,8 @@ import {
     DropDownList,
     Modal,
     SprintCreation,
-    AppendCondition,
+    AppendButton,
+    AppendForm,
 } from '..';
 
 import {
@@ -46,6 +47,12 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
 
     const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
+    const [appendCondition, setAppendCondition] = useState<'button' | 'form'>(
+        'button',
+    );
+
+    const [conditionTitle, setConditionTitle] = useState<string>('');
+
     const [searchParams, setSearchParams] = useSearchParams();
 
     const navigate = useNavigate();
@@ -72,6 +79,10 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
             })
             .catch((err) => console.log(err));
     }, [searchParams]);
+
+    const onCreateTask = () => {
+        alert('created');
+    };
 
     return (
         <main className={cn(className, styles.deskContainer)}>
@@ -122,7 +133,23 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                             key={c.id}
                         />
                     ))}
-                    <AppendCondition />
+                    {appendCondition === 'button' ? (
+                        <AppendButton
+                            onClick={() => setAppendCondition('form')}
+                        />
+                    ) : (
+                        <AppendForm
+                            onCreate={
+                                conditionTitle !== ''
+                                    ? onCreateTask
+                                    : () => alert('Введите название задачи')
+                            }
+                            onClose={() => setAppendCondition('button')}
+                            setTitle={setConditionTitle}
+                            title={conditionTitle}
+                            type="condition"
+                        />
+                    )}
                 </div>
             </div>
             {isModalOpened && (

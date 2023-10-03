@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import { AppendTaskButton, AppendTaskForm, TaskCard } from '..';
+import { AppendButton, AppendForm, TaskCard } from '..';
 
 import { useAppSelector } from '../../hooks/redux';
 
@@ -60,17 +60,18 @@ export const TaskCondition: FC<TaskConditionProps> = ({
                     <TaskCard taskId={t.id} key={t.id} />
                 ))}
                 {appendTask === 'button' ? (
-                    <AppendTaskButton onClick={() => setAppendTask('form')} />
+                    <AppendButton onClick={() => setAppendTask('form')} />
                 ) : (
-                    <AppendTaskForm
+                    <AppendForm
                         onCreate={
                             taskTitle !== ''
                                 ? onCreateTask
                                 : () => alert('Введите название задачи')
                         }
                         onClose={() => setAppendTask('button')}
-                        setTaskTitle={setTaskTitle}
-                        taskTitle={taskTitle}
+                        setTitle={setTaskTitle}
+                        title={taskTitle}
+                        type="task"
                     />
                 )}
             </div>

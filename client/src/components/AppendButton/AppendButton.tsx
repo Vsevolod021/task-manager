@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 
-import styles from './AppendTaskbutton.module.scss';
+import styles from './AppendButton.module.scss';
 import cn from 'classnames';
 
-interface AppendTaskButtonProps
+interface AppendButtonProps
     extends DetailedHTMLProps<
         HTMLAttributes<HTMLButtonElement>,
         HTMLButtonElement
@@ -11,7 +11,7 @@ interface AppendTaskButtonProps
     className?: string;
 }
 
-export const AppendTaskButton: FC<AppendTaskButtonProps> = ({
+export const AppendButton: FC<AppendButtonProps> = ({
     className,
     ...props
 }) => {

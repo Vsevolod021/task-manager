@@ -1,23 +1,25 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import { FC } from 'react';
 
 import { useAppSelector } from '../../hooks/redux';
 
-import styles from './AppendTaskForm.module.scss';
+import styles from './AppendForm.module.scss';
 import cn from 'classnames';
 
-interface AppendTaskFormProps {
+interface AppendFormProps {
     onCreate: () => void;
     onClose: () => void;
-    setTaskTitle: (state: string) => void;
-    taskTitle: string;
+    setTitle: (state: string) => void;
+    title: string;
+    type: 'task' | 'condition';
     className?: string;
 }
 
-export const AppendTaskForm: FC<AppendTaskFormProps> = ({
+export const AppendForm: FC<AppendFormProps> = ({
     onCreate,
     onClose,
-    setTaskTitle,
-    taskTitle,
+    setTitle,
+    title,
+    type,
     className,
     ...props
 }) => {
@@ -30,8 +32,8 @@ export const AppendTaskForm: FC<AppendTaskFormProps> = ({
         >
             <textarea
                 className={styles.input}
-                value={taskTitle}
-                onChange={(e) => setTaskTitle(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
             />
             <button className={styles.createBtn} onClick={onCreate}>
                 Создать
