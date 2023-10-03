@@ -2,15 +2,15 @@ import { FC, useState } from 'react';
 
 import { Modal, DeskCreation } from '..';
 
-import styles from './AppendDesk.module.scss';
+import styles from './CreateDeskButton.module.scss';
 import cn from 'classnames';
 
-type AppendDeskProps = {
+type CreateDeskButtonProps = {
     className?: string;
     size?: 'small' | 'big';
 };
 
-export const AppendDesk: FC<AppendDeskProps> = ({
+export const CreateDeskButton: FC<CreateDeskButtonProps> = ({
     className,
     size = 'small',
     ...props

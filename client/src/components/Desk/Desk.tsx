@@ -1,7 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { TaskCondition, DropDownList, Modal, SprintCreation } from '..';
+import {
+    TaskCondition,
+    DropDownList,
+    Modal,
+    SprintCreation,
+    AppendCondition,
+} from '..';
 
 import {
     WorkSprintAPIInterface,
@@ -116,6 +122,7 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                             key={c.id}
                         />
                     ))}
+                    <AppendCondition />
                 </div>
             </div>
             {isModalOpened && (

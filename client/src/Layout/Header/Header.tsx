@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import {
-    AppendDesk,
+    CreateDeskButton,
     MenuButton,
     Arrow,
     Modal,
@@ -43,7 +43,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
 
                     {isAuth ? (
                         <>
-                            <AppendDesk />
+                            <CreateDeskButton />
                             <div className={styles.avatar}>
                                 <img
                                     src={avatar}

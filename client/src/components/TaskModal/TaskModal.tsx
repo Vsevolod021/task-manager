@@ -1,9 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { DropDownList } from '..';
 
 import { TaskExtendedAPIInterface } from '../../interfaces/deskData.interface';
 
+import { getTaskCondition } from '../../http/taskConditionAPI';
 import { changeTaskInfo } from '../../http/taskAPI';
 
 import pencil from '../../assets/pencil.svg';
@@ -36,6 +37,9 @@ export const TaskModal: FC<TaskModalProps> = ({ taskData, className }) => {
 
     const [priority, setPriority] = useState<string>(taskData.info.priority);
 
+    const [taskCondition, setTaskCondition] = useState<string>('');
+
+    // Options
     const setOption = (optionName: string) => {
         setPriority(optionName);
     };
@@ -62,6 +66,12 @@ export const TaskModal: FC<TaskModalProps> = ({ taskData, className }) => {
             onClick: () => setOption('Очень низкий'),
         },
     ];
+
+    useEffect(() => {
+        getTaskCondition(taskData.taskConditionId).then((data) =>
+            setTaskCondition(data.name),
+        );
+    }, []);
 
     // методы
     const onChangeTaskInfo = async () => {
@@ -150,7 +160,7 @@ export const TaskModal: FC<TaskModalProps> = ({ taskData, className }) => {
                 <div className={styles.avatar}></div>
             </div>
             <p className={styles.statusTitle}>Состояние:</p>
-            <div className={styles.statusValue}>{taskData.taskConditionId}</div>
+            <div className={styles.statusValue}>{taskCondition}</div>
             <p className={styles.priorityTitle}>Приоритет:</p>
             <div
                 className={styles.priorityValue}

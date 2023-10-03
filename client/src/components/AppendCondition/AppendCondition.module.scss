@@ -1,0 +1,103 @@
+.wrapper {
+    width: 350px;
+    align-self: flex-start;
+}
+
+.openFormBtn {
+    width: 100%;
+    height: 70px;
+    padding: 20px;
+    background: none;
+    border: none;
+
+    opacity: 0.1;
+
+    transition: 0.3s ease-in-out;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+        background: var(--gray-light);
+        opacity: 1;
+    }
+
+    .plus {
+        font-size: 44px;
+    }
+    .text {
+        font-size: 25px;
+    }
+}
+
+.form {
+    width: 100%;
+    height: 90px;
+    padding: 5px 10px;
+
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 10px 20px;
+
+    button {
+        cursor: pointer;
+    }
+
+    .input {
+        grid-column: 1/3;
+        resize: none;
+        font-size: 18px;
+
+        &:hover {
+            outline: 1px solid var(--gray);
+        }
+    }
+
+    .createBtn {
+        background: none;
+        border: 1px solid black;
+        font-size: 18px;
+
+        &:hover {
+            background: var(--gray-light);
+        }
+    }
+
+    .closeBtn {
+        border: none;
+        background: none;
+        font-size: 18px;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+}
+
+.default {
+    border: 2px solid var(--black);
+}
+
+.red {
+    border: 2px solid rgb(246, 98, 98);
+}
+
+.yellow {
+    border: 2px solid rgb(255, 190, 69);
+}
+
+.blue {
+    border: 2px solid rgb(82, 82, 255);
+}
+
+.pink {
+    border: 2px solid rgb(253, 170, 184);
+}
+
+.purple {
+    border: 2px solid rgb(255, 117, 255);
+}

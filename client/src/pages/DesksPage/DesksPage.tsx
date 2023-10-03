@@ -8,7 +8,7 @@ import { getAllSprints } from '../../http/workSprintAPI';
 import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 
 import { Layout } from '../../Layout/Layout';
-import { AppendDesk } from '../../components';
+import { CreateDeskButton } from '../../components';
 
 import styles from './DesksPage.module.scss';
 
@@ -63,7 +63,7 @@ export const DesksPage = () => {
                             <h1 className={styles.title}>
                                 Создайте рабочую доску
                             </h1>
-                            <AppendDesk size="big" />
+                            <CreateDeskButton size="big" />
                         </>
                     )}
                 </main>

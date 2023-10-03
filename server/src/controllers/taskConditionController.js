@@ -23,6 +23,24 @@ class TaskConditionController {
         }
     }
 
+    async getOne(req, res, next) {
+        try {
+            const { id } = req.params;
+
+            const condition = await TaskCondition.findOne({
+                where: { id },
+            });
+
+            if (!condition) {
+                return next(ApiError.badRequest('Состояния с таким id не существует'));
+            }
+
+            return res.json(condition);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
     async getAll(req, res, next) {
         try {
             let { deskId } = req.query;
