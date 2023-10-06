@@ -1,17 +1,11 @@
 .wrapper {
-    width: 100%;
-    height: 60px;
-    margin: 10px 0;
-    padding: 0 20px;
-
     background: none;
     border: none;
     display: block;
-    position: relative;
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    // justify-content: flex-end;
 
     opacity: 0.1;
 
@@ -23,30 +17,42 @@
         background: var(--gray-light);
         opacity: 1;
     }
+
+    .plus {
+        font-size: 44px;
+    }
+    .text {
+        font-size: 25px;
+    }
 }
 
-.hr {
-    width: 25px;
-    height: 3px;
+.task {
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+
+    margin: 10px 0;
 }
 
-.vr {
-    height: 25px;
-    width: 3px;
+.condition {
+    width: 350px;
+    height: 70px;
 }
 
-.vr,
-.hr {
-    position: absolute;
-    background: var(--black);
-    left: 62%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-}
+.openFormBtn {
+    width: 100%;
+    height: 70px;
+    padding: 20px;
+    background: none;
+    border: none;
 
-.text {
-    position: absolute;
-    left: 67%;
-    font-size: 25px;
+    opacity: 0.1;
+
+    transition: 0.3s ease-in-out;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

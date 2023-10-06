@@ -1,9 +1,8 @@
 .wrapper {
     width: 100%;
     height: 90px;
-    margin: 10px 0;
+
     padding: 5px 10px;
-    border: 1px solid black;
 
     display: grid;
     grid-template-columns: 6fr 1fr;
@@ -43,6 +42,16 @@
             font-weight: 700;
         }
     }
+}
+
+.task {
+    margin: 10px 0;
+    border-width: 1px;
+}
+
+.condition {
+    width: 350px;
+    border-width: 2px !important;
 }
 
 .default {

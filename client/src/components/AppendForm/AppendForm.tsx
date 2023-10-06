@@ -27,7 +27,10 @@ export const AppendForm: FC<AppendFormProps> = ({
 
     return (
         <div
-            className={cn(className, styles.wrapper, styles[deskColor])}
+            className={cn(className, styles.wrapper, styles[deskColor], {
+                [styles.task]: type === 'task',
+                [styles.condition]: type === 'condition',
+            })}
             {...props}
         >
             <textarea

@@ -8,18 +8,27 @@ interface AppendButtonProps
         HTMLAttributes<HTMLButtonElement>,
         HTMLButtonElement
     > {
+    type: 'task' | 'condition';
     className?: string;
 }
 
 export const AppendButton: FC<AppendButtonProps> = ({
+    type,
     className,
     ...props
 }) => {
     return (
-        <button className={cn(className, styles.wrapper)} {...props}>
-            <div className={styles.hr} />
-            <div className={styles.vr} />
-            <span className={styles.text}>Задача</span>
+        <button
+            className={cn(className, styles.wrapper, {
+                [styles.task]: type === 'task',
+                [styles.condition]: type === 'condition',
+            })}
+            {...props}
+        >
+            <span className={styles.plus}>+</span>
+            <span className={styles.text}>
+                {type === 'task' ? 'Задача' : 'Состояние'}
+            </span>
         </button>
     );
 };

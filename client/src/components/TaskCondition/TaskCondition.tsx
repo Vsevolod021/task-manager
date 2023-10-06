@@ -60,7 +60,10 @@ export const TaskCondition: FC<TaskConditionProps> = ({
                     <TaskCard taskId={t.id} key={t.id} />
                 ))}
                 {appendTask === 'button' ? (
-                    <AppendButton onClick={() => setAppendTask('form')} />
+                    <AppendButton
+                        type="task"
+                        onClick={() => setAppendTask('form')}
+                    />
                 ) : (
                     <AppendForm
                         onCreate={

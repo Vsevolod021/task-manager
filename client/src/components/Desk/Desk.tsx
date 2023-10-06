@@ -16,6 +16,7 @@ import {
     TaskConditionAPIInterface,
 } from '../../interfaces/deskData.interface';
 
+import { createTaskCondition } from '../../http/taskConditionAPI';
 import { getTaskConditions } from '../../http/taskConditionAPI';
 import { getSprint } from '../../http/workSprintAPI';
 
@@ -78,10 +79,16 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                 setSprintData(data);
             })
             .catch((err) => console.log(err));
-    }, [searchParams]);
+    }, [searchParams, appendCondition]);
 
-    const onCreateTask = () => {
-        alert('created');
+    const onCreateCondition = async () => {
+        const data = await createTaskCondition(
+            conditionTitle,
+            deskData.id,
+        ).then((data) => {
+            setAppendCondition('button');
+            setConditionTitle('');
+        });
     };
 
     return (
@@ -135,16 +142,20 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                     ))}
                     {appendCondition === 'button' ? (
                         <AppendButton
+                            type="condition"
                             onClick={() => setAppendCondition('form')}
                         />
                     ) : (
                         <AppendForm
                             onCreate={
                                 conditionTitle !== ''
-                                    ? onCreateTask
+                                    ? onCreateCondition
                                     : () => alert('Введите название задачи')
                             }
-                            onClose={() => setAppendCondition('button')}
+                            onClose={() => {
+                                setAppendCondition('button');
+                                setConditionTitle('');
+                            }}
                             setTitle={setConditionTitle}
                             title={conditionTitle}
                             type="condition"
