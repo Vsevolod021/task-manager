@@ -82,10 +82,7 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
     }, [searchParams, appendCondition]);
 
     const onCreateCondition = async () => {
-        const data = await createTaskCondition(
-            conditionTitle,
-            deskData.id,
-        ).then((data) => {
+        await createTaskCondition(conditionTitle, deskData.id).then((data) => {
             setAppendCondition('button');
             setConditionTitle('');
         });
@@ -138,6 +135,7 @@ export const Desk: FC<DeskProps> = ({ deskData, sprintsData, className }) => {
                             conditionData={c}
                             sprintData={sprintData}
                             key={c.id}
+                            // handleDrop={() => v}
                         />
                     ))}
                     {appendCondition === 'button' ? (

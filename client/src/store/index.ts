@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import draggedTaskReducer from './DraggedTaskSlice';
 import workspaceReducer from './WorkspaceSlice';
 import authReducer from './AuthSlice';
 
 const store = configureStore({
     reducer: {
+        DraggedTask: draggedTaskReducer,
         Workspace: workspaceReducer,
         Auth: authReducer,
     },

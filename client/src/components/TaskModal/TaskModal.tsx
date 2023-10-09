@@ -75,22 +75,19 @@ export const TaskModal: FC<TaskModalProps> = ({ taskData, className }) => {
 
     // методы
     const onChangeTaskInfo = async () => {
-        const taskInfo = await changeTaskInfo(
+        await changeTaskInfo(
             title,
             description,
             executor,
             priority,
             taskData.id,
-        ).then((data) => console.log(priority));
+        );
     };
-
-    // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {};
 
     return (
         <div
             className={cn(className, styles.wrapper)}
             onClick={() => {
-                console.log('hhh');
                 onChangeTaskInfo();
                 setIsTitleinput(false);
                 setIsDescriptionInput(false);

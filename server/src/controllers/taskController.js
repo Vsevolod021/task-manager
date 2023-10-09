@@ -49,6 +49,8 @@ class TaskController {
         try {
             const { id, conditionId } = req.body;
 
+            console.log(id, conditionId);
+
             let task = await Task.findOne({
                 where: { id },
             });

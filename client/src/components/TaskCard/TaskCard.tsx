@@ -1,11 +1,13 @@
 import { FC, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import { TaskModal, Modal } from '..';
 
 import { fetchOneTask } from '../../http/taskAPI';
 
 import { TaskExtendedAPIInterface } from '../../interfaces/deskData.interface';
+
+import { setDraggedTask } from '../../store/DraggedTaskSlice';
+import { useAppDispatch } from '../../hooks/redux';
 
 import styles from './TaskCard.module.scss';
 import cn from 'classnames';
@@ -37,6 +39,10 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
         },
     });
 
+    const [isDragged, setIsDragged] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         fetchOneTask(taskId).then((data) => setTaskData(data));
     }, [isModalOpened, taskId]);
@@ -44,10 +50,12 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
     return (
         <>
             <div
-                className={cn(className, styles.wrapper)}
+                className={cn(className, styles.wrapper, {
+                    [styles.dragged]: isDragged === true,
+                })}
                 draggable
                 onClick={() => setIsModalOpened(true)}
-                // onDragStart={() => alert('hello')}
+                onDragStart={() => dispatch(setDraggedTask(taskId))}
             >
                 {taskData.info.title}
             </div>

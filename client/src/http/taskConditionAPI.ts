@@ -15,9 +15,7 @@ export const createTaskCondition = async (
 export const getTaskCondition = async (
     id: number,
 ): Promise<TaskConditionAPIInterface> => {
-    console.log('fff');
     const { data } = await $authHost.get('api/condition/' + id);
-    console.log(data);
     return data;
 };
 

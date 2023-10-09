@@ -2,14 +2,21 @@ import { FC, useEffect, useState } from 'react';
 
 import { AppendButton, AppendForm, TaskCard } from '..';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+
+import { removeDraggedTask } from '../../store/DraggedTaskSlice';
 
 import {
     TaskConditionAPIInterface,
     WorkSprintAPIInterface,
     TaskExtendedAPIInterface,
 } from '../../interfaces/deskData.interface';
-import { fetchAllTasks, createTask } from '../../http/taskAPI';
+
+import {
+    fetchAllTasks,
+    createTask,
+    changeTaskCondition,
+} from '../../http/taskAPI';
 
 import styles from './TaskCondition.module.scss';
 import cn from 'classnames';
@@ -31,29 +38,59 @@ export const TaskCondition: FC<TaskConditionProps> = ({
 
     const [taskTitle, setTaskTitle] = useState<string>('');
 
+    // drag'n'drop
+    const [isDragOver, setIsDragOver] = useState<boolean>(false);
+
+    // Redux
     const deskColor = useAppSelector((state) => state.Workspace.color);
 
+    const draggedTaskId = useAppSelector((state) => state.DraggedTask.id);
+
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
+        console.log();
         fetchAllTasks(sprintData.id, conditionData.id)
             .then((data) => {
                 setTasks(data);
             })
             .catch((err) => console.log(err));
-    }, [sprintData, appendTask]);
+    }, [sprintData, appendTask, tasks]);
 
     const onCreateTask = async () => {
-        const taskData = await createTask(
-            taskTitle,
-            sprintData.id,
-            conditionData.id,
-        ).then(() => {
-            setTaskTitle('');
-            setAppendTask('button');
-        });
+        await createTask(taskTitle, sprintData.id, conditionData.id).then(
+            () => {
+                setAppendTask('button');
+            },
+        );
+    };
+
+    const onChangeCondition = async () => {
+        await changeTaskCondition(draggedTaskId, conditionData.id).then(
+            (data) => {
+                setIsDragOver(false);
+                dispatch(removeDraggedTask());
+            },
+        );
     };
 
     return (
-        <div className={cn(styles.taskCondition, styles[deskColor], className)}>
+        <div
+            className={cn(
+                styles.taskCondition,
+                styles[deskColor],
+                {
+                    [styles.dragOver]: isDragOver === true,
+                },
+                className,
+            )}
+            onDragOver={(e) => {
+                e.preventDefault();
+                setIsDragOver(true);
+            }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={onChangeCondition}
+        >
             <h1 className={styles.conditionTitle}>{conditionData.name}</h1>
             <div className={styles.conditionCards}>
                 {tasks.map((t) => (

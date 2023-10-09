@@ -24,8 +24,6 @@ export const AppRouter = () => {
                 dispatch(setUserName(data?.name));
                 dispatch(setUserId(data?.id));
 
-                console.log(data);
-
                 if (data.id) {
                     getWorkspace(data.id)
                         .then((data) => {
@@ -36,10 +34,10 @@ export const AppRouter = () => {
                                 }),
                             );
                         })
-                        .catch((err) => console.log('adfvafd ' + err));
+                        .catch((err) => console.log(err));
                 }
             })
-            .catch((err) => console.log('qqq ' + err));
+            .catch((err) => console.log(err));
     }, []);
 
     return (

@@ -21,7 +21,7 @@ export const createTask = async (
 };
 
 export const changeTaskCondition = async (
-    id: number,
+    id: number | null,
     conditionId: number,
 ): Promise<TaskAPIInterface> => {
     const { data } = await $authHost.post('api/task/change-condition', {
