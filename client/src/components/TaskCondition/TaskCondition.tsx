@@ -32,6 +32,7 @@ export const TaskCondition: FC<TaskConditionProps> = ({
     conditionData,
     sprintData,
 }) => {
+    console.log('fff');
     const [tasks, setTasks] = useState<TaskExtendedAPIInterface[]>([]);
 
     const [appendTask, setAppendTask] = useState<'button' | 'form'>('button');
@@ -49,13 +50,12 @@ export const TaskCondition: FC<TaskConditionProps> = ({
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log();
         fetchAllTasks(sprintData.id, conditionData.id)
             .then((data) => {
                 setTasks(data);
             })
             .catch((err) => console.log(err));
-    }, [sprintData, appendTask, tasks]);
+    }, [sprintData, appendTask, draggedTaskId]);
 
     const onCreateTask = async () => {
         await createTask(taskTitle, sprintData.id, conditionData.id).then(
