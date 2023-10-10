@@ -99,8 +99,6 @@ class TaskController {
                 priority: priority,
             });
 
-            console.log(priority);
-
             return res.json(taskInfo);
         } catch (e) {
             next(ApiError.badRequest(e.message));
@@ -145,6 +143,28 @@ class TaskController {
             });
 
             return res.json(tasks);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
+    // Удаление задачи
+    async deleteOne(req, res, next) {
+        try {
+            const { id } = req.body;
+
+            const task = await Task.findOne({
+                where: { id },
+                include: { model: TaskInfo, as: 'info' },
+            });
+
+            if (!task) {
+                return next(ApiError.badRequest('Задачи в таким id не существует'));
+            }
+
+            await Task.destroy({ where: { id } });
+
+            return res.json(task);
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }

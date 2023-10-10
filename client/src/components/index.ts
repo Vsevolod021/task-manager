@@ -5,6 +5,7 @@ export * from './TaskCondition/TaskCondition';
 export * from './AppendButton/AppendButton';
 export * from './DeskCreation/DeskCreation';
 export * from './DropDownList/DropDownList';
+export * from './ConfirmModal/ConfirmModal';
 export * from './AppendForm/AppendForm';
 export * from './MenuButton/MenuButton';
 export * from './FormButton/FormButton';

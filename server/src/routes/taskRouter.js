@@ -9,5 +9,6 @@ router.post('/change-condition', taskController.changeCondition);
 router.post('/change-info', taskController.changeInfo);
 router.get('/:id', taskController.getOne);
 router.get('/', taskController.getAll);
+router.post('/delete', taskController.deleteOne);
 
 export default router;

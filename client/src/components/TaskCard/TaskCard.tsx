@@ -1,13 +1,16 @@
 import { FC, useState, useEffect } from 'react';
 
-import { TaskModal, Modal } from '..';
+import { TaskModal, Modal, ConfirmModal } from '..';
 
-import { fetchOneTask } from '../../http/taskAPI';
+import { fetchOneTask, deleteTask } from '../../http/taskAPI';
 
 import { TaskExtendedAPIInterface } from '../../interfaces/deskData.interface';
 
 import { setDraggedTask } from '../../store/DraggedTaskSlice';
 import { useAppDispatch } from '../../hooks/redux';
+
+import deleteIcon from '../../assets/delete.svg';
+import avatarIcon from '../../assets/avatar.png';
 
 import styles from './TaskCard.module.scss';
 import cn from 'classnames';
@@ -18,7 +21,11 @@ type TaskCardProps = {
 };
 
 export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
-    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+    const [isInfoOpened, setIsInfoOpened] = useState<boolean>(false);
+
+    const [isDeletedWindow, setIsDeleteWindow] = useState<boolean>(false);
+
+    const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
     const [taskData, setTaskData] = useState<TaskExtendedAPIInterface>({
         id: 0,
@@ -45,23 +52,61 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
 
     useEffect(() => {
         fetchOneTask(taskId).then((data) => setTaskData(data));
-    }, [isModalOpened, taskId]);
+    }, [isInfoOpened, taskId]);
+
+    const handleDeleteButton = async () => {
+        await deleteTask(taskId).then((data) => {
+            setIsDeleted(true);
+            setIsDeleteWindow(false);
+        });
+    };
 
     return (
         <>
-            <div
-                className={cn(className, styles.wrapper, {
-                    [styles.dragged]: isDragged === true,
-                })}
-                draggable
-                onClick={() => setIsModalOpened(true)}
-                onDragStart={() => dispatch(setDraggedTask(taskId))}
-            >
-                {taskData.info.title}
-            </div>
-            {isModalOpened && (
-                <Modal onClose={() => setIsModalOpened(false)}>
+            {!isDeleted && (
+                <div
+                    className={cn(className, styles.wrapper, {
+                        [styles.dragged]: isDragged === true,
+                    })}
+                    draggable
+                    onClick={() => setIsInfoOpened(true)}
+                    onDragStart={() => dispatch(setDraggedTask(taskId))}
+                >
+                    <div className={styles.title}>{taskData.info.title}</div>
+                    <button
+                        className={styles.deleteBtn}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsDeleteWindow(true);
+                        }}
+                    >
+                        <img src={deleteIcon} alt="" />
+                    </button>
+                    <div className={styles.executors}>
+                        <div className={styles.avatar}>
+                            <img src={avatarIcon} width={27} />
+                        </div>
+                        <div className={styles.avatar}>
+                            <img src={avatarIcon} width={27} />
+                        </div>
+                        <div className={styles.avatar}>
+                            <img src={avatarIcon} width={27} />
+                        </div>
+                    </div>
+                </div>
+            )}
+            {isInfoOpened && (
+                <Modal onClose={() => setIsInfoOpened(false)}>
                     <TaskModal taskData={taskData} />
+                </Modal>
+            )}
+            {isDeletedWindow && (
+                <Modal onClose={() => setIsDeleteWindow(false)}>
+                    <ConfirmModal
+                        type="task"
+                        handleConfirm={handleDeleteButton}
+                        handleCancel={() => setIsDeleteWindow(false)}
+                    />
                 </Modal>
             )}
         </>

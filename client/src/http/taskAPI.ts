@@ -68,3 +68,13 @@ export const fetchAllTasks = async (
 
     return data;
 };
+
+export const deleteTask = async (
+    id: number | null,
+): Promise<TaskAPIInterface> => {
+    const { data } = await $authHost.post('api/task/delete', {
+        id,
+    });
+
+    return data;
+};

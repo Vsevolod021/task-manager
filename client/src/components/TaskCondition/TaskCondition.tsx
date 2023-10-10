@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import { AppendButton, AppendForm, TaskCard } from '..';
+import { AppendButton, AppendForm, TaskCard, Modal, ConfirmModal } from '..';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 
@@ -16,6 +16,7 @@ import {
     fetchAllTasks,
     createTask,
     changeTaskCondition,
+    deleteTask,
 } from '../../http/taskAPI';
 
 import styles from './TaskCondition.module.scss';
@@ -32,12 +33,13 @@ export const TaskCondition: FC<TaskConditionProps> = ({
     conditionData,
     sprintData,
 }) => {
-    console.log('fff');
     const [tasks, setTasks] = useState<TaskExtendedAPIInterface[]>([]);
 
     const [appendTask, setAppendTask] = useState<'button' | 'form'>('button');
 
     const [taskTitle, setTaskTitle] = useState<string>('');
+
+    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
     // drag'n'drop
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
