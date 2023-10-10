@@ -12,6 +12,7 @@ export * from './FormButton/FormButton';
 export * from './LeaveAuth/LeaveAuth';
 export * from './TaskModal/TaskModal';
 export * from './FormInput/FormInput';
+export * from './DeskCard/DeskCard';
 export * from './TaskCard/TaskCard';
 export * from './Error/Error';
 export * from './Arrow/Arrow';

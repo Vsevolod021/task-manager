@@ -1,0 +1,52 @@
+.deskItem {
+    margin: 0 auto;
+    width: 1000px;
+    height: 150px;
+    border: 2px solid var(--black);
+    cursor: pointer;
+    color: black;
+
+    padding: 20px 40px;
+
+    display: grid;
+
+    grid-template-columns: 150px auto;
+    grid-template-rows: 1fr 1fr;
+
+    transition: 0.5s ease-in-out;
+
+    .deskNameTitle {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .deskName {
+        font-size: 24px;
+    }
+    .participantsTitle {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .participants {
+        display: flex;
+        gap: 10px;
+
+        .participantAvatar {
+            border: 1px solid var(--black);
+            border-radius: 50%;
+
+            width: 35px;
+            height: 35px;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &:hover {
+        background: var(--gray-light);
+    }
+}
