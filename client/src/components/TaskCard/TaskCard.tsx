@@ -9,7 +9,7 @@ import { TaskExtendedAPIInterface } from '../../interfaces/deskData.interface';
 import { setDraggedTask } from '../../store/DraggedTaskSlice';
 import { useAppDispatch } from '../../hooks/redux';
 
-import deleteIcon from '../../assets/delete.svg';
+import deleteIcon from '../../assets/deleteIcon.svg';
 import avatarIcon from '../../assets/avatar.png';
 
 import styles from './TaskCard.module.scss';
@@ -23,7 +23,8 @@ type TaskCardProps = {
 export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
     const [isInfoOpened, setIsInfoOpened] = useState<boolean>(false);
 
-    const [isDeletedWindow, setIsDeleteWindow] = useState<boolean>(false);
+    const [isDeletedWindowOpened, setIsDeleteWindowOpened] =
+        useState<boolean>(false);
 
     const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
@@ -57,7 +58,7 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
     const handleDeleteButton = async () => {
         await deleteTask(taskId).then((data) => {
             setIsDeleted(true);
-            setIsDeleteWindow(false);
+            setIsDeleteWindowOpened(false);
         });
     };
 
@@ -77,20 +78,20 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
                         className={styles.deleteBtn}
                         onClick={(e) => {
                             e.stopPropagation();
-                            setIsDeleteWindow(true);
+                            setIsDeleteWindowOpened(true);
                         }}
                     >
                         <img src={deleteIcon} alt="" />
                     </button>
                     <div className={styles.executors}>
                         <div className={styles.avatar}>
-                            <img src={avatarIcon} width={27} />
+                            <img src={avatarIcon} width={27} alt="" />
                         </div>
                         <div className={styles.avatar}>
-                            <img src={avatarIcon} width={27} />
+                            <img src={avatarIcon} width={27} alt="" />
                         </div>
                         <div className={styles.avatar}>
-                            <img src={avatarIcon} width={27} />
+                            <img src={avatarIcon} width={27} alt="" />
                         </div>
                     </div>
                 </div>
@@ -100,12 +101,12 @@ export const TaskCard: FC<TaskCardProps> = ({ taskId, className }) => {
                     <TaskModal taskData={taskData} />
                 </Modal>
             )}
-            {isDeletedWindow && (
-                <Modal onClose={() => setIsDeleteWindow(false)}>
+            {isDeletedWindowOpened && (
+                <Modal onClose={() => setIsDeleteWindowOpened(false)}>
                     <ConfirmModal
                         type="task"
                         handleConfirm={handleDeleteButton}
-                        handleCancel={() => setIsDeleteWindow(false)}
+                        handleCancel={() => setIsDeleteWindowOpened(false)}
                     />
                 </Modal>
             )}

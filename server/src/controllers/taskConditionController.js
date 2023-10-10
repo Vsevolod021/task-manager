@@ -1,4 +1,4 @@
-import { TaskCondition, Desk } from '../models/models.js';
+import { TaskCondition, Desk, Task, WorkSprint } from '../models/models.js';
 
 import ApiError from '../error/ApiError.js';
 
@@ -58,6 +58,36 @@ class TaskConditionController {
             });
 
             return res.json(taskConditions);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
+    async deleteOne(req, res, next) {
+        try {
+            const { id } = req.body;
+
+            const condition = await TaskCondition.findOne({
+                where: { id },
+            });
+
+            if (!condition) {
+                return next(ApiError.badRequest('Состояния с таким id не существует'));
+            }
+
+            console.log('hey');
+
+            const task = await Task.findOne({
+                where: { taskConditionId: id },
+            });
+
+            if (task) {
+                return next(ApiError.badRequest('Невозможно удалить состояние, содержащее задачи'));
+            }
+
+            await TaskCondition.destroy({ where: { id } });
+
+            return res.json(condition);
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }

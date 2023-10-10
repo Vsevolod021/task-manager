@@ -155,11 +155,10 @@ class TaskController {
 
             const task = await Task.findOne({
                 where: { id },
-                include: { model: TaskInfo, as: 'info' },
             });
 
             if (!task) {
-                return next(ApiError.badRequest('Задачи в таким id не существует'));
+                return next(ApiError.badRequest('Задачи с таким id не существует'));
             }
 
             await Task.destroy({ where: { id } });

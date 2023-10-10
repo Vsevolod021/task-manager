@@ -10,6 +10,8 @@ import { DeskAPIInterface } from '../../interfaces/deskData.interface';
 import { Layout } from '../../Layout/Layout';
 import { CreateDeskButton } from '../../components';
 
+import avatarIcon from '../../assets/avatar.png';
+
 import styles from './DesksPage.module.scss';
 
 export const DesksPage = () => {
@@ -43,7 +45,7 @@ export const DesksPage = () => {
                 <main className={styles.wrapper}>
                     {allDesks.length !== 0 ? (
                         <>
-                            <h1 className={styles.title}>All desks</h1>
+                            <h1 className={styles.title}>Все доски</h1>
                             <div className={styles.desks}>
                                 {allDesks.map((d) => (
                                     <div
@@ -53,7 +55,63 @@ export const DesksPage = () => {
                                             navigate(`/desk?deskId=${d.id}`)
                                         }
                                     >
-                                        <div>{d.name}</div>
+                                        <div className={styles.deskNameTitle}>
+                                            Название:
+                                        </div>
+                                        <div className={styles.deskName}>
+                                            {d.name}
+                                        </div>
+                                        <div
+                                            className={styles.participantsTitle}
+                                        >
+                                            Участники:
+                                        </div>
+                                        <div className={styles.participants}>
+                                            <div
+                                                className={
+                                                    styles.participantAvatar
+                                                }
+                                            >
+                                                <img
+                                                    src={avatarIcon}
+                                                    width={36}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div
+                                                className={
+                                                    styles.participantAvatar
+                                                }
+                                            >
+                                                <img
+                                                    src={avatarIcon}
+                                                    width={36}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div
+                                                className={
+                                                    styles.participantAvatar
+                                                }
+                                            >
+                                                <img
+                                                    src={avatarIcon}
+                                                    width={36}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div
+                                                className={
+                                                    styles.participantAvatar
+                                                }
+                                            >
+                                                <img
+                                                    src={avatarIcon}
+                                                    width={36}
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

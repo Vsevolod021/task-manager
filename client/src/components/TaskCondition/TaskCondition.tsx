@@ -16,8 +16,11 @@ import {
     fetchAllTasks,
     createTask,
     changeTaskCondition,
-    deleteTask,
 } from '../../http/taskAPI';
+
+import { deleteCondition } from '../../http/taskConditionAPI';
+
+import deleteIcon from '../../assets/deleteIcon.svg';
 
 import styles from './TaskCondition.module.scss';
 import cn from 'classnames';
@@ -39,7 +42,10 @@ export const TaskCondition: FC<TaskConditionProps> = ({
 
     const [taskTitle, setTaskTitle] = useState<string>('');
 
-    const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+    const [isDeleted, setIsDeleted] = useState<boolean>(false);
+
+    const [isDeleteWindowOpened, setIsDeleteWindowOpened] =
+        useState<boolean>(false);
 
     // drag'n'drop
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
@@ -76,47 +82,77 @@ export const TaskCondition: FC<TaskConditionProps> = ({
         );
     };
 
+    const handleDeleteButton = async () => {
+        await deleteCondition(conditionData.id).then((data) => {
+            setIsDeleted(true);
+            setIsDeleteWindowOpened(false);
+        });
+    };
+
     return (
-        <div
-            className={cn(
-                styles.taskCondition,
-                styles[deskColor],
-                {
-                    [styles.dragOver]: isDragOver === true,
-                },
-                className,
+        <>
+            {!isDeleted && (
+                <div
+                    className={cn(
+                        styles.taskCondition,
+                        styles[deskColor],
+                        {
+                            [styles.dragOver]: isDragOver === true,
+                        },
+                        className,
+                    )}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        setIsDragOver(true);
+                    }}
+                    onDragLeave={() => setIsDragOver(false)}
+                    onDrop={onChangeCondition}
+                >
+                    <div className={styles.conditionTitle}>
+                        <h1>{conditionData.name}</h1>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsDeleteWindowOpened(true);
+                            }}
+                        >
+                            <img src={deleteIcon} alt="" />
+                        </button>
+                    </div>
+                    <div className={styles.conditionCards}>
+                        {tasks.map((t) => (
+                            <TaskCard taskId={t.id} key={t.id} />
+                        ))}
+                        {appendTask === 'button' ? (
+                            <AppendButton
+                                type="task"
+                                onClick={() => setAppendTask('form')}
+                            />
+                        ) : (
+                            <AppendForm
+                                onCreate={
+                                    taskTitle !== ''
+                                        ? onCreateTask
+                                        : () => alert('Введите название задачи')
+                                }
+                                onClose={() => setAppendTask('button')}
+                                setTitle={setTaskTitle}
+                                title={taskTitle}
+                                type="task"
+                            />
+                        )}
+                    </div>
+                </div>
             )}
-            onDragOver={(e) => {
-                e.preventDefault();
-                setIsDragOver(true);
-            }}
-            onDragLeave={() => setIsDragOver(false)}
-            onDrop={onChangeCondition}
-        >
-            <h1 className={styles.conditionTitle}>{conditionData.name}</h1>
-            <div className={styles.conditionCards}>
-                {tasks.map((t) => (
-                    <TaskCard taskId={t.id} key={t.id} />
-                ))}
-                {appendTask === 'button' ? (
-                    <AppendButton
-                        type="task"
-                        onClick={() => setAppendTask('form')}
+            {isDeleteWindowOpened && (
+                <Modal onClose={() => setIsDeleteWindowOpened(false)}>
+                    <ConfirmModal
+                        type="condition"
+                        handleConfirm={handleDeleteButton}
+                        handleCancel={() => setIsDeleteWindowOpened(false)}
                     />
-                ) : (
-                    <AppendForm
-                        onCreate={
-                            taskTitle !== ''
-                                ? onCreateTask
-                                : () => alert('Введите название задачи')
-                        }
-                        onClose={() => setAppendTask('button')}
-                        setTitle={setTaskTitle}
-                        title={taskTitle}
-                        type="task"
-                    />
-                )}
-            </div>
-        </div>
+                </Modal>
+            )}
+        </>
     );
 };

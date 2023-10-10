@@ -27,3 +27,13 @@ export const getTaskConditions = async (
     });
     return data;
 };
+
+export const deleteCondition = async (
+    id: number | null,
+): Promise<TaskConditionAPIInterface> => {
+    const { data } = await $authHost.post('api/condition/delete', {
+        id,
+    });
+
+    return data;
+};
